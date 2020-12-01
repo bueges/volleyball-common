@@ -1,14 +1,17 @@
 package volleyball.common.model.match;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import volleyball.common.model.result.IResult;
 import volleyball.common.model.result.Result;
 import volleyball.common.model.team.Team;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 @ToString
 public class Match implements IMatch {
@@ -16,6 +19,11 @@ public class Match implements IMatch {
     public static MatchBuilder builder() {
         return new MatchBuilder();
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Exclude
+    private Integer id;
 
     @NonNull
     @Getter

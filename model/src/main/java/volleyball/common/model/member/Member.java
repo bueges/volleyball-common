@@ -1,10 +1,13 @@
 package volleyball.common.model.member;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.LocalDate;
 
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 @ToString
 public class Member implements IMember {
@@ -12,6 +15,11 @@ public class Member implements IMember {
     public static MemberBuilder builder() {
         return new MemberBuilder();
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Exclude
+    private Integer id;
 
     @NonNull
     @Getter

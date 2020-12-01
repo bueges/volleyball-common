@@ -23,6 +23,7 @@
     <modules>
         <module>api</module>
         <module>model</module>
+        <module>repository</module>
         <!--        <module>factory</module>-->
         <!--        <module>playout</module>-->
     </modules>
