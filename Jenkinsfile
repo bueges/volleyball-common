@@ -13,7 +13,7 @@ pipeline {
             stage('Build and Test') {
                 steps {
                     echo 'Building and testing ...'
-                    sh 'mvn clean deploy'
+                    sh 'mvn clean test'
                 }
             }
 
