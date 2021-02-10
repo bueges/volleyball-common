@@ -21,6 +21,7 @@
         <module>calendar-factory</module>
         <module>calendar-playout</module>
         <module>calendar-tools</module>
+        <module>calendar-integrationtest</module>
     </modules>
 
 </project>

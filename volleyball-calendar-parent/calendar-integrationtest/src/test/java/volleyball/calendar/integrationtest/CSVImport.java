@@ -1,4 +1,4 @@
-package volleyball.manager.integrationtest;
+package volleyball.calendar.integrationtest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
