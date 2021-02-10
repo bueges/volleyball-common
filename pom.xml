@@ -18,13 +18,13 @@
 
     <properties>
         <java.version>11</java.version>
-        <revision>1.0-SNAPSHOT</revision>
+        <revision>1.1-SNAPSHOT</revision>
     </properties>
 
     <modules>
         <module>volleyball-api</module>
-        <module>volleyball-manager</module>
-        <module>volleyball-manager-integrationtest</module>
+        <module>volleyball-calendar-parent</module>
+        <module>volleyball-calendar-integrationtest</module>
     </modules>
 
     <dependencyManagement>

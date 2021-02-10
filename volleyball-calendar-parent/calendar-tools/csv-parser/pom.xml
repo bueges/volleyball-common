@@ -6,42 +6,37 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball</groupId>
-        <artifactId>volleyball-parent</artifactId>
+        <groupId>volleyball-calendar</groupId>
+        <artifactId>calendar-tools</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball</groupId>
-    <artifactId>volleyball-api</artifactId>
+    <groupId>volleyball-calendar</groupId>
+    <artifactId>csv-parser</artifactId>
 
     <dependencies>
-        <!-- spring dependencies -->
+        <!-- internal dependencies -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>volleyball</groupId>
+            <artifactId>volleyball-api</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!-- external dependencies -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <!--test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
