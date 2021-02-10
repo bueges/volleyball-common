@@ -6,21 +6,21 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball</groupId>
-        <artifactId>volleyball-parent</artifactId>
+        <groupId>volleyball-calendar</groupId>
+        <artifactId>volleyball-calendar-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
     <groupId>volleyball-calendar</groupId>
-    <artifactId>volleyball-calendar-parent</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>athlete-calendar</artifactId>
 
-    <modules>
-        <module>athlete-calendar</module>
-        <module>calendar-importer</module>
-        <module>calendar-factory</module>
-        <module>calendar-playout</module>
-        <module>calendar-tools</module>
-    </modules>
+    <dependencies>
+        <!-- internal dependencies -->
+        <dependency>
+            <groupId>volleyball</groupId>
+            <artifactId>volleyball-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 
 </project>
