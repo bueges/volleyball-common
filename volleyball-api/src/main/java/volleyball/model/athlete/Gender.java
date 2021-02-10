@@ -1,4 +1,4 @@
-package volleyball.model.member;
+package volleyball.model.athlete;
 
 public enum Gender {
 

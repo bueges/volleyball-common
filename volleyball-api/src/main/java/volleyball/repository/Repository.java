@@ -3,7 +3,6 @@ package volleyball.repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
@@ -15,7 +14,7 @@ import volleyball.repository.association.IAssociationRepository;
 import volleyball.repository.club.IClubRepository;
 import volleyball.repository.competition.ICompetitionRepository;
 import volleyball.repository.match.IMatchRepository;
-import volleyball.repository.member.IMemberRepository;
+import volleyball.repository.athlete.IAthleteRepository;
 import volleyball.repository.result.IResultRepository;
 import volleyball.repository.season.ISeasonRepository;
 import volleyball.repository.team.ITeamRepository;
@@ -49,7 +48,7 @@ public class Repository implements IRepository {
     ITeamRepository teamRepository;
 
     @Autowired
-    IMemberRepository memberRepository;
+    IAthleteRepository memberRepository;
 
     @Override
     public Optional<Association> saveAssociationObject(Association association) {

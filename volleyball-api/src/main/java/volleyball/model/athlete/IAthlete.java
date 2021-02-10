@@ -1,10 +1,10 @@
-package volleyball.model.member;
+package volleyball.model.athlete;
 
 import volleyball.model.IModelObject;
 
 import java.time.LocalDate;
 
-public interface IMember extends IModelObject {
+public interface IAthlete extends IModelObject {
 
     /**
      * @return the member name

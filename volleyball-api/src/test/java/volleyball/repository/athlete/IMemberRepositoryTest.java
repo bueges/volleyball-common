@@ -1,4 +1,4 @@
-package volleyball.repository.member;
+package volleyball.repository.athlete;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.TestApplication;
-import volleyball.model.member.Member;
+import volleyball.model.athlete.Athlete;
 
 import javax.transaction.Transactional;
 
@@ -20,13 +20,13 @@ import static volleyball.repository.RepositoryTestUtils.checkRepositorySize;
 class IMemberRepositoryTest {
 
     @Autowired
-    IMemberRepository memberRepository;
+    IAthleteRepository memberRepository;
 
     @BeforeEach
     public void init() {
         checkRepositorySize(memberRepository, 0);
 
-        Member member = Member.builder()
+        Athlete member = Athlete.builder()
                 .withName(MEMBER_NAME)
                 .withPreName(MEMBER_PRENAME)
                 .withBirthday(MEMBER_BIRTHDAY)
@@ -44,7 +44,7 @@ class IMemberRepositoryTest {
     @DisplayName("save same member object again")
     @Transactional
     public void saveSameMemberObjectAgain() {
-        Member member2 = Member.builder()
+        Athlete member2 = Athlete.builder()
                 .withName(MEMBER_NAME)
                 .withPreName(MEMBER_PRENAME)
                 .withBirthday(MEMBER_BIRTHDAY)

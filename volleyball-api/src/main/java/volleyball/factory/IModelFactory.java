@@ -1,11 +1,10 @@
 package volleyball.factory;
 
 import volleyball.model.match.Match;
-import volleyball.model.member.Member;
+import volleyball.model.athlete.Athlete;
 import volleyball.tools.parser.IParserResult;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 
 public interface IModelFactory {
 
@@ -18,10 +17,10 @@ public interface IModelFactory {
     Optional<Match> buildAndSaveMatchObject(IParserResult parserResult);
 
     /**
-     * build and save a {@link Member} object
+     * build and save a {@link Athlete} object
      *
      * @param parserResult - the parsed data
-     * @return the saved {@link Member} object or an empty object
+     * @return the saved {@link Athlete} object or an empty object
      */
-    Optional<Member> buildAndSaveMemberObject(IParserResult parserResult);
+    Optional<Athlete> buildAndSaveMemberObject(IParserResult parserResult);
 }

@@ -1,4 +1,4 @@
-package volleyball.model.member;
+package volleyball.model.athlete;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 @EqualsAndHashCode
-public class Member implements IMember {
+public class Athlete implements IAthlete {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

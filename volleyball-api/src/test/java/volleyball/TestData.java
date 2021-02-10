@@ -1,7 +1,7 @@
 package volleyball;
 
 import org.springframework.data.util.Pair;
-import volleyball.model.member.Gender;
+import volleyball.model.athlete.Gender;
 import volleyball.tools.parser.ParserResult;
 
 import java.time.LocalDate;
