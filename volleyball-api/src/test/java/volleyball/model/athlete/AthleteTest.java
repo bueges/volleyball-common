@@ -17,52 +17,52 @@ public class AthleteTest {
     @Test
     @DisplayName("create athlete")
     public void createAthlete() {
-        Athlete athlete = new Athlete(null, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
+        Athlete athlete = new Athlete(null, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
         log.info("create athlete : {}", athlete);
 
         assertNotNull(athlete);
 
         assertNotNull(athlete.getPreName());
-        assertEquals(MEMBER_PRENAME, athlete.getPreName());
+        assertEquals(ATHLETE_PRENAME, athlete.getPreName());
 
         assertNotNull(athlete.getBirthday());
-        assertEquals(MEMBER_BIRTHDAY, athlete.getBirthday());
+        assertEquals(ATHLETE_BIRTHDAY, athlete.getBirthday());
     }
 
     @Test
     @DisplayName("check NullPointerException when create athlete with null name")
     public void checkNullPointerExceptionWhenCreateAthleteWithNullName() {
-        assertThrows(NullPointerException.class, () -> new Athlete(null, null, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE));
+        assertThrows(NullPointerException.class, () -> new Athlete(null, null, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE));
     }
 
     @Test
     @DisplayName("check NullPointerException when create athlete with null preName")
     public void throwsNullPointerExceptionWhenCreateAthleteWithNullPreName() {
-        assertThrows(NullPointerException.class, () -> new Athlete(null, MEMBER_NAME, null, MEMBER_BIRTHDAY, Gender.MALE));
+        assertThrows(NullPointerException.class, () -> new Athlete(null, ATHLETE_NAME, null, ATHLETE_BIRTHDAY, Gender.MALE));
     }
 
     @Test
     @DisplayName("check NullPointerException when create athlete with null birthday")
     public void checkNullPointerExceptionWhenCreateAthleteWithNullBirthday() {
-        assertThrows(NullPointerException.class, () -> new Athlete(null, MEMBER_NAME, MEMBER_PRENAME, null, Gender.MALE));
+        assertThrows(NullPointerException.class, () -> new Athlete(null, ATHLETE_NAME, ATHLETE_PRENAME, null, Gender.MALE));
     }
 
     @Test
     @DisplayName("check NullPointerException when create athlete with null gender")
     public void checkNullPointerExceptionWhenCreateAthleteWithNullGender() {
-        assertThrows(NullPointerException.class, () -> new Athlete(null, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, null));
+        assertThrows(NullPointerException.class, () -> new Athlete(null, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, null));
     }
 
     @ParameterizedTest
-    @MethodSource("volleyball.TestData#getMemberName")
+    @MethodSource("volleyball.TestData#getAthleteName")
     @DisplayName("compare athletes with same ID")
     public void compareAthletesWithSameID() {
-        Athlete athlete1 = new Athlete(1, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete2 = new Athlete(1, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete3 = new Athlete(1, "other-name", MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete4 = new Athlete(1, MEMBER_NAME, "other-prename", MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete5 = new Athlete(1, MEMBER_NAME, MEMBER_PRENAME, LocalDate.now(), Gender.MALE);
-        Athlete athlete6 = new Athlete(1, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.FEMALE);
+        Athlete athlete1 = new Athlete(1, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete2 = new Athlete(1, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete3 = new Athlete(1, "other-name", ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete4 = new Athlete(1, ATHLETE_NAME, "other-prename", ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete5 = new Athlete(1, ATHLETE_NAME, ATHLETE_PRENAME, LocalDate.now(), Gender.MALE);
+        Athlete athlete6 = new Athlete(1, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.FEMALE);
 
         log.info("compare athletes : ");
         log.info("athlete 1 : {}", athlete1);
@@ -80,15 +80,15 @@ public class AthleteTest {
     }
 
     @ParameterizedTest
-    @MethodSource("volleyball.TestData#getMemberName")
+    @MethodSource("volleyball.TestData#getAthleteName")
     @DisplayName("compare athletes with different ID")
     public void compareMembersWithDifferentID() {
-        Athlete athlete1 = new Athlete(1, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete2 = new Athlete(2, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete3 = new Athlete(3, "other-name", MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete4 = new Athlete(4, MEMBER_NAME, "other-prename", MEMBER_BIRTHDAY, Gender.MALE);
-        Athlete athlete5 = new Athlete(5, MEMBER_NAME, MEMBER_PRENAME, LocalDate.now(), Gender.MALE);
-        Athlete athlete6 = new Athlete(6, MEMBER_NAME, MEMBER_PRENAME, MEMBER_BIRTHDAY, Gender.FEMALE);
+        Athlete athlete1 = new Athlete(1, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete2 = new Athlete(2, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete3 = new Athlete(3, "other-name", ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete4 = new Athlete(4, ATHLETE_NAME, "other-prename", ATHLETE_BIRTHDAY, Gender.MALE);
+        Athlete athlete5 = new Athlete(5, ATHLETE_NAME, ATHLETE_PRENAME, LocalDate.now(), Gender.MALE);
+        Athlete athlete6 = new Athlete(6, ATHLETE_NAME, ATHLETE_PRENAME, ATHLETE_BIRTHDAY, Gender.FEMALE);
 
         log.info("compare athletes : ");
         log.info("athlete 1 : {}", athlete1);

@@ -37,10 +37,10 @@ public class TestData {
     public static final String TEAM2_NAME = "team2";
 
     // member test constants
-    public static final String MEMBER_NAME = "name";
-    public static final String MEMBER_PRENAME = "preName";
-    public static final LocalDate MEMBER_BIRTHDAY = LocalDate.of(2000, 1, 1);
-    public static final Gender MEMBER_GENDER = Gender.MALE;
+    public static final String ATHLETE_NAME = "name";
+    public static final String ATHLETE_PRENAME = "preName";
+    public static final LocalDate ATHLETE_BIRTHDAY = LocalDate.of(2000, 1, 1);
+    public static final Gender ATHLETE_GENDER = Gender.MALE;
 
     // association test parameter
     public static Stream<String> getAssociationName() {
@@ -86,8 +86,8 @@ public class TestData {
     }
 
     // member test parameter
-    public static Stream<String> getMemberName() {
-        return Stream.of(MEMBER_NAME, "");
+    public static Stream<String> getAthleteName() {
+        return Stream.of(ATHLETE_NAME, "");
     }
 
     // factory test parameter

@@ -27,10 +27,10 @@ class IMemberRepositoryTest {
         checkRepositorySize(memberRepository, 0);
 
         Athlete member = Athlete.builder()
-                .withName(MEMBER_NAME)
-                .withPreName(MEMBER_PRENAME)
-                .withBirthday(MEMBER_BIRTHDAY)
-                .withGender(MEMBER_GENDER)
+                .withName(ATHLETE_NAME)
+                .withPreName(ATHLETE_PRENAME)
+                .withBirthday(ATHLETE_BIRTHDAY)
+                .withGender(ATHLETE_GENDER)
                 .build();
         log.info("build member object : {}", member);
 
@@ -45,10 +45,10 @@ class IMemberRepositoryTest {
     @Transactional
     public void saveSameMemberObjectAgain() {
         Athlete member2 = Athlete.builder()
-                .withName(MEMBER_NAME)
-                .withPreName(MEMBER_PRENAME)
-                .withBirthday(MEMBER_BIRTHDAY)
-                .withGender(MEMBER_GENDER)
+                .withName(ATHLETE_NAME)
+                .withPreName(ATHLETE_PRENAME)
+                .withBirthday(ATHLETE_BIRTHDAY)
+                .withGender(ATHLETE_GENDER)
                 .build();
         log.info("build member object : {}", member2);
 
