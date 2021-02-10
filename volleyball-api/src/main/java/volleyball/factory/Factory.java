@@ -7,7 +7,7 @@ import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.match.Match;
-import volleyball.model.member.Member;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.result.Result;
 import volleyball.model.season.Season;
 import volleyball.model.team.Team;
@@ -336,7 +336,7 @@ public class Factory implements IModelFactory {
     }
 
     @Override
-    public Optional<Member> buildAndSaveMemberObject(IParserResult parserResult) {
+    public Optional<Athlete> buildAndSaveMemberObject(IParserResult parserResult) {
         return Optional.empty();
     }
 }
