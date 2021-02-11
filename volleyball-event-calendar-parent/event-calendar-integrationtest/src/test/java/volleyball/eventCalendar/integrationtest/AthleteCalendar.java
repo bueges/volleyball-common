@@ -1,4 +1,4 @@
-package volleyball.calendar.integrationtest;
+package volleyball.eventCalendar.integrationtest;
 
 public class AthleteCalendar {
 

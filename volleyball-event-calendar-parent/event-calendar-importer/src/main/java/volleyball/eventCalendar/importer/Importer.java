@@ -1,14 +1,12 @@
-package volleyball.calendar.importer;
+package volleyball.eventCalendar.importer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import volleyball.calendar.factory.samsFactory.SamsFactory;
-import volleyball.calendar.importer.configuration.CSVConfiguration;
-import volleyball.calendar.importer.configuration.Configuration;
-import volleyball.calendar.tools.csvparser.CSVParser;
+import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
+import volleyball.eventCalendar.importer.configuration.CSVConfiguration;
+import volleyball.eventCalendar.importer.configuration.Configuration;
+import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.tools.downloader.FileDownloader;
 
 import java.net.MalformedURLException;
@@ -27,21 +25,21 @@ public class Importer {
     Configuration configuration;
 
     public void importData() {
-        configuration.getCsvConfigurationList().stream()
-                .forEach(csvConfiguration -> importCSVData(csvConfiguration));
+        configuration.getCsvConfigurationList()
+                .forEach(this::importCSVData);
     }
 
     protected void importCSVData(CSVConfiguration configuration) {
         try {
             Optional<Path> path = FileDownloader.downloadFileFromURL(new URL(configuration.getPlayingScheduleURL()));
 
-            CSVParser csvParser = new CSVParser(configuration.getAssociationName(), path.get());
-            csvParser.parseFile().stream().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
+            if (path.isPresent()) {
+                CSVParser csvParser = new CSVParser(configuration.getAssociationName(), path.get());
+                csvParser.parseFile().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
+            }
         } catch (MalformedURLException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
     }
-
-
 }

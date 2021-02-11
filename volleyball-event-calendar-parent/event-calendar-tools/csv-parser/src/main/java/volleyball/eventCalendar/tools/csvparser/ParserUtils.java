@@ -1,4 +1,4 @@
-package volleyball.calendar.tools.csvparser;
+package volleyball.eventCalendar.tools.csvparser;
 
 import com.google.common.collect.Lists;
 import lombok.AccessLevel;

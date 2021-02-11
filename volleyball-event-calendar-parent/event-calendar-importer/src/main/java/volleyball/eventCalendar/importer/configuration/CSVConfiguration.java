@@ -1,4 +1,4 @@
-package volleyball.calendar.importer.configuration;
+package volleyball.eventCalendar.importer.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

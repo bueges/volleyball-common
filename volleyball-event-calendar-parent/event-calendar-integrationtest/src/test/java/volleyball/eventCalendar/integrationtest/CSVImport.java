@@ -1,13 +1,13 @@
-package volleyball.calendar.integrationtest;
+package volleyball.eventCalendar.integrationtest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import volleyball.calendar.factory.samsFactory.SamsFactory;
-import volleyball.calendar.importer.Importer;
-import volleyball.calendar.tools.csvparser.CSVParser;
+import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
+import volleyball.eventCalendar.importer.Importer;
+import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;

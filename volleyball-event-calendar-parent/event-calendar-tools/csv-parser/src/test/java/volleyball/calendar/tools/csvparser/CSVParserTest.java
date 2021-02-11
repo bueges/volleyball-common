@@ -3,6 +3,7 @@ package volleyball.calendar.tools.csvparser;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.tools.eventData.IEventData;
 
 import java.nio.file.Path;
