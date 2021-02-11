@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 import volleyball.model.result.Result;
 import volleyball.model.season.Season;
@@ -13,6 +14,7 @@ import volleyball.model.team.Team;
 import volleyball.repository.association.IAssociationRepository;
 import volleyball.repository.club.IClubRepository;
 import volleyball.repository.competition.ICompetitionRepository;
+import volleyball.repository.event.IEventRepository;
 import volleyball.repository.match.IMatchRepository;
 import volleyball.repository.athlete.IAthleteRepository;
 import volleyball.repository.result.IResultRepository;
@@ -49,6 +51,9 @@ public class Repository implements IRepository {
 
     @Autowired
     IAthleteRepository memberRepository;
+
+    @Autowired
+    IEventRepository eventRepository;
 
     @Override
     public Optional<Association> saveAssociationObject(Association association) {
@@ -167,5 +172,22 @@ public class Repository implements IRepository {
     @Override
     public List<Team> getTeamObjects() {
         return teamRepository.findAll();
+    }
+
+    @Override
+    public Optional<Event> saveEventObject(Event event) {
+        if (event == null) {
+            log.error("event object is NULL - so return empty object.");
+            return Optional.empty();
+        }
+
+        Event savedEvent = eventRepository.saveObject(event);
+        log.info("saved event object : {}", savedEvent);
+        return Optional.ofNullable(savedEvent);
+    }
+
+    @Override
+    public List<Event> getEventObjects() {
+        return eventRepository.findAll();
     }
 }
