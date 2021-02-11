@@ -3,6 +3,7 @@ package volleyball.eventCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import volleyball.eventCalendar.athletecalendar.AthleteCalendar;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.match.Match;
 import volleyball.model.team.Team;
 import volleyball.repository.Repository;
@@ -19,7 +20,7 @@ public class EventCalendarService {
 
     private AthleteCalendar athleteCalendar;
 
-    public List<Match> getCalendar() {
+    public List<Match> getCalendar(Athlete athlete) {
         List<Team> teamList = athleteCalendar.getTeamList();
 
         Predicate<Match> isAthleteMemberOfMatchTeam = m -> teamList.contains(m.getTeam1()) || teamList.contains(m.getTeam2());

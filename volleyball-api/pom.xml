@@ -32,6 +32,11 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <!--test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
