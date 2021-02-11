@@ -1,4 +1,4 @@
-package volleyball.calendar.athletecalendar;
+package volleyball.eventCalendar.athletecalendar;
 
 
 import org.junit.jupiter.api.DisplayName;
@@ -32,5 +32,4 @@ class AthleteCalendarTest {
 
         athleteCalendar.removeTeam(team1);
     }
-
 }

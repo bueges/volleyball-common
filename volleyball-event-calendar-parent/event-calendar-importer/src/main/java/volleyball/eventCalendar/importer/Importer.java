@@ -24,6 +24,9 @@ public class Importer {
     @Autowired
     Configuration configuration;
 
+    /**
+     * import csv data from {@link Configuration}
+     */
     public void importData() {
         configuration.getCsvConfigurationList()
                 .forEach(this::importCSVData);

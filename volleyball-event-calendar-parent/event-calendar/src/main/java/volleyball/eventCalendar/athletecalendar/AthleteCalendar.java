@@ -1,9 +1,10 @@
-package volleyball.calendar.athletecalendar;
+package volleyball.eventCalendar.athletecalendar;
 
 import com.google.common.collect.Lists;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import volleyball.eventCalendar.IEventCalendar;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.match.Match;
 import volleyball.model.team.Team;
@@ -18,11 +19,12 @@ import java.util.stream.Collectors;
 @ToString
 @EqualsAndHashCode
 @Slf4j
-public class AthleteCalendar {
+public class AthleteCalendar implements IEventCalendar {
 
     @Autowired
     Repository repository;
 
+    @NonNull
     @Getter
     @EqualsAndHashCode.Exclude
     private Athlete athlete;
