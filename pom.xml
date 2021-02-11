@@ -18,12 +18,12 @@
 
     <properties>
         <java.version>11</java.version>
-        <revision>1.1-SNAPSHOT</revision>
+        <revision>1.2-SNAPSHOT</revision>
     </properties>
 
     <modules>
         <module>volleyball-api</module>
-        <module>volleyball-calendar-parent</module>
+        <module>volleyball-event-calendar-parent</module>
     </modules>
 
     <dependencyManagement>

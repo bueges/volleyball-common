@@ -6,25 +6,25 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball-calendar</groupId>
-        <artifactId>volleyball-calendar-parent</artifactId>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>volleyball-event-calendar-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
+    <groupId>volleyball-event-calendar</groupId>
     <artifactId>calendar-integrationtest</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
-            <groupId>volleyball-calendar</groupId>
+            <groupId>volleyball-event-calendar</groupId>
             <artifactId>calendar-importer</artifactId>
             <version>${revision}</version>
         </dependency>
 
         <dependency>
-            <groupId>volleyball-calendar</groupId>
-            <artifactId>athlete-calendar</artifactId>
+            <groupId>volleyball-event-calendar</groupId>
+            <artifactId>event-calendar</artifactId>
             <version>${revision}</version>
         </dependency>
 

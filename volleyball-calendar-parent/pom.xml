@@ -11,17 +11,17 @@
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
-    <artifactId>volleyball-calendar-parent</artifactId>
+    <groupId>volleyball-event-calendar</groupId>
+    <artifactId>volleyball-event-calendar-parent</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>athlete-calendar</module>
-        <module>calendar-importer</module>
-        <module>calendar-factory</module>
-        <module>calendar-playout</module>
-        <module>calendar-tools</module>
-        <module>calendar-integrationtest</module>
+        <module>event-calendar</module>
+        <module>event-calendar-importer</module>
+        <module>event-calendar-factory</module>
+        <module>event-calendar-playout</module>
+        <module>event-calendar-tools</module>
+        <module>event-calendar-integrationtest</module>
     </modules>
 
 </project>

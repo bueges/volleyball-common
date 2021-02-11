@@ -7,13 +7,13 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball-calendar</groupId>
-        <artifactId>volleyball-calendar-parent</artifactId>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>volleyball-event-calendar-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
-    <artifactId>calendar-factory</artifactId>
+    <groupId>volleyball-event-calendar</groupId>
+    <artifactId>event-calendar-factory</artifactId>
     <packaging>pom</packaging>
 
     <modules>

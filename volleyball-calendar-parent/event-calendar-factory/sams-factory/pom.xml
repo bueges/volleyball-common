@@ -6,13 +6,13 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball-calendar</groupId>
-        <artifactId>volleyball-calendar-parent</artifactId>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>event-calendar-factory</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
-    <artifactId>calendar-playout</artifactId>
+    <groupId>volleyball-event-calendar</groupId>
+    <artifactId>sams-factory</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->
@@ -20,6 +20,19 @@
             <groupId>volleyball</groupId>
             <artifactId>volleyball-api</artifactId>
             <version>${revision}</version>
+        </dependency>
+
+        <!--test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

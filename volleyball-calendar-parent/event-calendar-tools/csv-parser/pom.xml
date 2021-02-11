@@ -6,12 +6,12 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball-calendar</groupId>
-        <artifactId>calendar-tools</artifactId>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>event-calendar-tools</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
+    <groupId>volleyball-event-calendar</groupId>
     <artifactId>csv-parser</artifactId>
 
     <dependencies>

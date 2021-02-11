@@ -6,32 +6,38 @@
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball-calendar</groupId>
-        <artifactId>volleyball-calendar-parent</artifactId>
-        <version>${revision}</version>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>volleyball-event-calendar-parent</artifactId>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
-    <groupId>volleyball-calendar</groupId>
-    <artifactId>athlete-calendar</artifactId>
+    <groupId>volleyball-event-calendar</groupId>
+    <artifactId>calendar-importer</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
-            <groupId>volleyball</groupId>
-            <artifactId>volleyball-api</artifactId>
+            <groupId>volleyball-event-calendar</groupId>
+            <artifactId>sams-factory</artifactId>
             <version>${revision}</version>
         </dependency>
 
-        <!-- external dependencies -->
         <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>volleyball-event-calendar</groupId>
+            <artifactId>csv-parser</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!--test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
