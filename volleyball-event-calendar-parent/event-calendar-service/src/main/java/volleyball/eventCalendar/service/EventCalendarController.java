@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
 import volleyball.eventCalendar.service.configuration.CSVConfiguration;
 import volleyball.eventCalendar.service.configuration.Configuration;
-import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.tools.downloader.FileDownloader;
 
 import java.net.MalformedURLException;

@@ -21,7 +21,6 @@
         <module>event-calendar-factory</module>
         <module>event-calendar-playout</module>
         <module>event-calendar-tools</module>
-        <module>event-calendar-integrationtest</module>
     </modules>
 
 </project>
