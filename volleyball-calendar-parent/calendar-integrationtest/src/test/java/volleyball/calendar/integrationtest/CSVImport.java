@@ -14,7 +14,7 @@ import volleyball.model.competition.Competition;
 import volleyball.model.match.Match;
 import volleyball.model.team.Team;
 import volleyball.repository.Repository;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -42,8 +42,8 @@ public class CSVImport {
 
         // import playing schedule without result
         csvParser = new CSVParser(associationName, Paths.get("src", "test", "resources", "csvParser", "PlayingSchedule.csv"));
-        List<IParserResult> parserResultList = csvParser.parseFile();
-        parserResultList.stream().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
+        List<IEventData> eventDataList = csvParser.parseFile();
+        eventDataList.stream().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
 
         List<Match> matchList = repository.getMatchObjects();
         assertNotNull(matchList);
@@ -54,8 +54,8 @@ public class CSVImport {
 
         // import playing schedule with result
         csvParser = new CSVParser(associationName, Paths.get("src", "test", "resources", "csvParser", "PlayingScheduleWithResult.csv"));
-        parserResultList = csvParser.parseFile();
-        parserResultList.stream().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
+        eventDataList = csvParser.parseFile();
+        eventDataList.stream().forEach(parserResult -> samsFactory.buildAndSaveMatchObject(parserResult));
 
         matchList = repository.getMatchObjects();
         assertNotNull(matchList);

@@ -2,7 +2,7 @@ package volleyball;
 
 import org.springframework.data.util.Pair;
 import volleyball.model.athlete.Gender;
-import volleyball.tools.parser.ParserResult;
+import volleyball.tools.eventData.EventData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -91,10 +91,10 @@ public class TestData {
     }
 
     // factory test parameter
-    public static Stream<ParserResult> getRequiredData() {
+    public static Stream<EventData> getRequiredData() {
         return Stream.of(
                 // without result
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -108,7 +108,7 @@ public class TestData {
                         .build(),
 
                 // without club1 name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -121,7 +121,7 @@ public class TestData {
                         .build(),
 
                 // without club2 name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -134,7 +134,7 @@ public class TestData {
                         .build(),
 
                 // without association name
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -147,7 +147,7 @@ public class TestData {
                         .build(),
 
                 // without season start year
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -160,7 +160,7 @@ public class TestData {
                         .build(),
 
                 // without season end year
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -173,7 +173,7 @@ public class TestData {
                         .build(),
 
                 // without competition name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -186,7 +186,7 @@ public class TestData {
                         .build(),
 
                 // without match number
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(TestData.ASSOCIATION_NAME)
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -200,10 +200,10 @@ public class TestData {
         );
     }
 
-    public static Stream<ParserResult> getInvalidSeasonData() {
+    public static Stream<EventData> getInvalidSeasonData() {
         return Stream.of(
                 // invalid season
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_START_YEAR)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -213,7 +213,7 @@ public class TestData {
                         .build(),
 
                 // invalid season
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(1999)
                         .withSeasonEndYear(2000)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -223,7 +223,7 @@ public class TestData {
                         .build(),
 
                 // invalid season
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(TestData.SEASON_START_YEAR)
                         .withSeasonEndYear(TestData.SEASON_START_YEAR + 2)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -233,7 +233,7 @@ public class TestData {
                         .build(),
 
                 // invalid season
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(TestData.SEASON_END_YEAR)
                         .withSeasonEndYear(TestData.SEASON_START_YEAR)
                         .withCompetitionName(TestData.COMPETITION_NAME)
@@ -244,10 +244,10 @@ public class TestData {
         );
     }
 
-    public static Stream<ParserResult> getInvalidResultData() {
+    public static Stream<EventData> getInvalidResultData() {
         return Stream.of(
                 // invalid result
-                ParserResult.builder()
+                EventData.builder()
                         .withMatchDateTime(TestData.MATCH_DATE_TIME)
                         .withTeam1Name(TestData.TEAM1_NAME)
                         .withTeam2Name(TestData.TEAM2_NAME)
@@ -256,7 +256,7 @@ public class TestData {
                         .build(),
 
                 // invalid result
-                ParserResult.builder()
+                EventData.builder()
                         .withMatchDateTime(TestData.MATCH_DATE_TIME)
                         .withTeam1Name(TestData.TEAM1_NAME)
                         .withTeam2Name(TestData.TEAM2_NAME)
@@ -265,7 +265,7 @@ public class TestData {
                         .build(),
 
                 // invalid result
-                ParserResult.builder()
+                EventData.builder()
                         .withMatchDateTime(TestData.MATCH_DATE_TIME)
                         .withTeam1Name(TestData.TEAM1_NAME)
                         .withTeam2Name(TestData.TEAM2_NAME)
@@ -275,22 +275,22 @@ public class TestData {
         );
     }
 
-    public static Stream<ParserResult> getInvalidMatchData() {
+    public static Stream<EventData> getInvalidMatchData() {
         return Stream.of(
                 // invalid match
-                ParserResult.builder()
+                EventData.builder()
                         .withTeam1Name(TestData.TEAM1_NAME)
                         .withTeam2Name(TestData.TEAM2_NAME)
                         .build(),
 
                 // invalid match
-                ParserResult.builder()
+                EventData.builder()
                         .withMatchDateTime(TestData.MATCH_DATE_TIME)
                         .withTeam2Name(TestData.TEAM2_NAME)
                         .build(),
                 // invalid match
 
-                ParserResult.builder()
+                EventData.builder()
                         .withMatchDateTime(TestData.MATCH_DATE_TIME)
                         .withTeam1Name(TestData.TEAM1_NAME)
                         .build());

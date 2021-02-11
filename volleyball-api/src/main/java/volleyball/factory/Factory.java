@@ -12,7 +12,7 @@ import volleyball.model.result.Result;
 import volleyball.model.season.Season;
 import volleyball.model.team.Team;
 import volleyball.repository.Repository;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -25,88 +25,88 @@ public class Factory implements IModelFactory {
     Repository repositoryManager;
 
     /**
-     * test if the {@link IParserResult} contains the association name
+     * test if the {@link IEventData} contains the association name
      */
-    protected Predicate<IParserResult> isAssociationNamePresent = data -> data.getAssociationName().isPresent();
+    protected Predicate<IEventData> isAssociationNamePresent = data -> data.getAssociationName().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the season period
+     * test if the {@link IEventData} contains the season period
      */
-    protected Predicate<IParserResult> isSeasonPeriodPresent = data -> data.getSeasonStartYear().isPresent() && data.getSeasonEndYear().isPresent();
+    protected Predicate<IEventData> isSeasonPeriodPresent = data -> data.getSeasonStartYear().isPresent() && data.getSeasonEndYear().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the season period after the year 2000
+     * test if the {@link IEventData} contains the season period after the year 2000
      */
-    protected Predicate<IParserResult> isSeasonPeriodAfterYear2000 = data -> data.getSeasonStartYear().get() >= 2000 && data.getSeasonEndYear().get() >= 2000;
+    protected Predicate<IEventData> isSeasonPeriodAfterYear2000 = data -> data.getSeasonStartYear().get() >= 2000 && data.getSeasonEndYear().get() >= 2000;
 
     /**
-     * test if the {@link IParserResult} contains the season period in right order - start year is before end year
+     * test if the {@link IEventData} contains the season period in right order - start year is before end year
      */
-    protected Predicate<IParserResult> isSeasonPeriodInRightOrder = data -> data.getSeasonStartYear().get() < data.getSeasonEndYear().get();
+    protected Predicate<IEventData> isSeasonPeriodInRightOrder = data -> data.getSeasonStartYear().get() < data.getSeasonEndYear().get();
 
     /**
-     * test if the {@link IParserResult} contains the season perdiod in correct length
+     * test if the {@link IEventData} contains the season perdiod in correct length
      */
-    protected Predicate<IParserResult> isSeasonPeriodLengthRight = data -> data.getSeasonEndYear().get() - data.getSeasonStartYear().get() == 1;
+    protected Predicate<IEventData> isSeasonPeriodLengthRight = data -> data.getSeasonEndYear().get() - data.getSeasonStartYear().get() == 1;
 
     /**
-     * test if the {@link IParserResult} contains the competition name
+     * test if the {@link IEventData} contains the competition name
      */
-    protected Predicate<IParserResult> isCompetitionNamePresent = data -> data.getCompetitionName().isPresent();
+    protected Predicate<IEventData> isCompetitionNamePresent = data -> data.getCompetitionName().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the sets of first and second team
+     * test if the {@link IEventData} contains the sets of first and second team
      */
-    protected Predicate<IParserResult> isResultPresent = data -> data.getSetsTeam1().isPresent() && data.getSetsTeam2().isPresent();
+    protected Predicate<IEventData> isResultPresent = data -> data.getSetsTeam1().isPresent() && data.getSetsTeam2().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the result sets in range [0,3]
+     * test if the {@link IEventData} contains the result sets in range [0,3]
      */
-    protected Predicate<IParserResult> isResultSetInRange = data -> (data.getSetsTeam1().get() >= 0 && data.getSetsTeam1().get() <= 3) &&
+    protected Predicate<IEventData> isResultSetInRange = data -> (data.getSetsTeam1().get() >= 0 && data.getSetsTeam1().get() <= 3) &&
             (data.getSetsTeam2().get() >= 0 && data.getSetsTeam2().get() <= 3);
 
     /**
-     * test if the {@link IParserResult} contains the result with equal sets
+     * test if the {@link IEventData} contains the result with equal sets
      */
-    protected Predicate<IParserResult> isResultSetEqual = data -> data.getSetsTeam1().get() == data.getSetsTeam2().get();
+    protected Predicate<IEventData> isResultSetEqual = data -> data.getSetsTeam1().get() == data.getSetsTeam2().get();
 
     /**
-     * test if the {@link IParserResult} contains the result with equal zero sets
+     * test if the {@link IEventData} contains the result with equal zero sets
      */
-    protected Predicate<IParserResult> isResultSetsEqualZero = data -> data.getSetsTeam1().get() == 0 && data.getSetsTeam2().get() == 0;
+    protected Predicate<IEventData> isResultSetsEqualZero = data -> data.getSetsTeam1().get() == 0 && data.getSetsTeam2().get() == 0;
 
     /**
-     * test if the {@link IParserResult} contains the match date time
+     * test if the {@link IEventData} contains the match date time
      */
-    protected Predicate<IParserResult> isMatchDateTimePresent = data -> data.getMatchDateTime().isPresent();
+    protected Predicate<IEventData> isMatchDateTimePresent = data -> data.getMatchDateTime().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the match number
+     * test if the {@link IEventData} contains the match number
      */
-    protected Predicate<IParserResult> isMatchNumberPresent = data -> data.getMatchNumber().isPresent();
+    protected Predicate<IEventData> isMatchNumberPresent = data -> data.getMatchNumber().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the first club name
+     * test if the {@link IEventData} contains the first club name
      */
-    protected Predicate<IParserResult> isFirstClubNamePresent = data -> data.getClub1Name().isPresent();
+    protected Predicate<IEventData> isFirstClubNamePresent = data -> data.getClub1Name().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the first team name
+     * test if the {@link IEventData} contains the first team name
      */
-    protected Predicate<IParserResult> isFirstTeamNamePresent = data -> data.getTeam1Name().isPresent();
+    protected Predicate<IEventData> isFirstTeamNamePresent = data -> data.getTeam1Name().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the second club name
+     * test if the {@link IEventData} contains the second club name
      */
-    protected Predicate<IParserResult> isSecondClubNamePresent = data -> data.getClub2Name().isPresent();
+    protected Predicate<IEventData> isSecondClubNamePresent = data -> data.getClub2Name().isPresent();
 
     /**
-     * test if the {@link IParserResult} contains the second team name
+     * test if the {@link IEventData} contains the second team name
      */
-    protected Predicate<IParserResult> isSecondTeamNamePresent = data -> data.getTeam2Name().isPresent();
+    protected Predicate<IEventData> isSecondTeamNamePresent = data -> data.getTeam2Name().isPresent();
 
     @Override
-    public Optional<Match> buildAndSaveMatchObject(IParserResult parserResult) {
+    public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
         if (parserResult == null) {
             log.error("the required parser data can't be NULL -  so return an empty object");
             return Optional.empty();
@@ -148,7 +148,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Association} object or an empty object
      */
-    protected Optional<Association> buildAndSaveAssociationObject(IParserResult parserResult) {
+    protected Optional<Association> buildAndSaveAssociationObject(IEventData parserResult) {
         if (!isAssociationNamePresent.test(parserResult)) {
             log.error("the required association name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -168,7 +168,7 @@ public class Factory implements IModelFactory {
      * @param parserResult the parsed data
      * @return the saved {@link Season} object or an empty object
      */
-    protected Optional<Season> buildAndSaveSeasonObject(IParserResult parserResult) {
+    protected Optional<Season> buildAndSaveSeasonObject(IEventData parserResult) {
         if (!isSeasonPeriodPresent.test(parserResult)) {
             log.error("the required season period can't be empty -  so return an empty object");
             return Optional.empty();
@@ -205,7 +205,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Competition} object or an empty object
      */
-    protected Optional<Competition> buildAndSaveCompetitionObject(IParserResult parserResult) {
+    protected Optional<Competition> buildAndSaveCompetitionObject(IEventData parserResult) {
         if (!isCompetitionNamePresent.test(parserResult)) {
             log.error("the required competition name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -226,7 +226,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Result} object or an empty object
      */
-    protected Optional<Result> buildAndSaveResult(IParserResult parserResult) {
+    protected Optional<Result> buildAndSaveResult(IEventData parserResult) {
         if (!isResultPresent.test(parserResult)) {
             log.error("the required result can't be empty -  so return an empty object");
             return Optional.empty();
@@ -257,7 +257,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Club} object or an empty object
      */
-    protected Optional<Club> buildAndSaveClub1Object(IParserResult parserResult) {
+    protected Optional<Club> buildAndSaveClub1Object(IEventData parserResult) {
         if (!isFirstClubNamePresent.test(parserResult)) {
             log.error("the required club name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -277,7 +277,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Team} object or an empty object
      */
-    protected Optional<Team> buildAndSaveTeam1Object(IParserResult parserResult) {
+    protected Optional<Team> buildAndSaveTeam1Object(IEventData parserResult) {
         if (!isFirstTeamNamePresent.test(parserResult)) {
             log.error("the required team name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -299,7 +299,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Club} object or an empty object
      */
-    protected Optional<Club> buildAndSaveClub2Object(IParserResult parserResult) {
+    protected Optional<Club> buildAndSaveClub2Object(IEventData parserResult) {
         if (!isSecondClubNamePresent.test(parserResult)) {
             log.error("the required club name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -319,7 +319,7 @@ public class Factory implements IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Team} object or an empty object
      */
-    protected Optional<Team> buildAndSaveTeam2Object(IParserResult parserResult) {
+    protected Optional<Team> buildAndSaveTeam2Object(IEventData parserResult) {
         if (!isSecondTeamNamePresent.test(parserResult)) {
             log.error("the required team name can't be empty -  so return an empty object");
             return Optional.empty();
@@ -336,7 +336,7 @@ public class Factory implements IModelFactory {
     }
 
     @Override
-    public Optional<Athlete> buildAndSaveMemberObject(IParserResult parserResult) {
+    public Optional<Athlete> buildAndSaveMemberObject(IEventData parserResult) {
         return Optional.empty();
     }
 }

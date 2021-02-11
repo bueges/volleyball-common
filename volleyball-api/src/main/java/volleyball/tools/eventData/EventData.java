@@ -1,4 +1,4 @@
-package volleyball.tools.parser;
+package volleyball.tools.eventData;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Builder(setterPrefix = "with")
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class ParserResult implements IParserResult {
+public class EventData implements IEventData {
 
     private final String associationName;
     private final Integer seasonStartYear;

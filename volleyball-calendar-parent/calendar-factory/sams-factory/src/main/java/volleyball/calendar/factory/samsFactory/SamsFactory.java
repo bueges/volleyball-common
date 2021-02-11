@@ -7,7 +7,7 @@ import volleyball.factory.Factory;
 import volleyball.factory.IModelFactory;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public class SamsFactory extends Factory implements IModelFactory {
     Repository repositoryManager;
 
     @Override
-    public Optional<Match> buildAndSaveMatchObject(IParserResult parserResult) {
+    public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
         if (!isAssociationNamePresent.test(parserResult)) {
             log.error("the required association name can't be empty -  so return an empty object");
             return Optional.empty();

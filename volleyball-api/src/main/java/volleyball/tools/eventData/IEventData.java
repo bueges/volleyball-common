@@ -1,10 +1,10 @@
-package volleyball.tools.parser;
+package volleyball.tools.eventData;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public interface IParserResult {
+public interface IEventData {
 
     /**
      * @return the parsed association name or an empty object
@@ -24,7 +24,7 @@ public interface IParserResult {
     /**
      * test if the parser result contains all required season data
      */
-    Predicate<IParserResult> hasRequiredSeasonData = data -> data.getSeasonStartYear().isPresent();
+    Predicate<IEventData> hasRequiredSeasonData = data -> data.getSeasonStartYear().isPresent();
 
     /**
      * @return the parsed competition name or an empty object

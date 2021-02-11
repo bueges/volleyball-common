@@ -4,11 +4,9 @@ import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import volleyball.tools.parser.IParser;
-import volleyball.tools.parser.IParserResult;
-import volleyball.tools.parser.ParserResult;
+import volleyball.tools.eventData.IEventData;
+import volleyball.tools.eventData.EventData;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -37,8 +35,8 @@ public class CSVParser implements IParser {
     private final Path inputFilePath;
 
     @Override
-    public List<IParserResult> parseFile() {
-        List<IParserResult> parserResultList = Lists.newArrayList();
+    public List<IEventData> parseFile() {
+        List<IEventData> parserResultList = Lists.newArrayList();
 
         if (inputFilePath == null) {
             log.error("input file path is NULL - so return empty parser result");
@@ -50,7 +48,7 @@ public class CSVParser implements IParser {
                         .collect(Collectors.toList())
                         .forEach(
                                 line -> {
-                                    ParserResult.ParserResultBuilder parserResult = ParserResult.builder();
+                                    EventData.EventDataBuilder parserResult = EventData.builder();
                                     String[] csvFields = line.split("[,;]");
 
                                     // association fields
@@ -111,7 +109,7 @@ public class CSVParser implements IParser {
                                     log.debug("set parser field setsTeam2 : {}", setsTeam2);
                                     parserResult.withSetsTeam2(setsTeam2);
 
-                                    IParserResult s = parserResult.build();
+                                    IEventData s = parserResult.build();
                                     log.info("parser data : {}", s);
                                     parserResultList.add(parserResult.build());
                                 }

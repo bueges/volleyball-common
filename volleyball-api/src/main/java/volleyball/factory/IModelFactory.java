@@ -2,7 +2,7 @@ package volleyball.factory;
 
 import volleyball.model.match.Match;
 import volleyball.model.athlete.Athlete;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ public interface IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Match} object or an empty object
      */
-    Optional<Match> buildAndSaveMatchObject(IParserResult parserResult);
+    Optional<Match> buildAndSaveMatchObject(IEventData parserResult);
 
     /**
      * build and save a {@link Athlete} object
@@ -22,5 +22,5 @@ public interface IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Athlete} object or an empty object
      */
-    Optional<Athlete> buildAndSaveMemberObject(IParserResult parserResult);
+    Optional<Athlete> buildAndSaveMemberObject(IEventData parserResult);
 }

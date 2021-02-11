@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class SamsFactoryTest {
     @MethodSource("volleyball.TestParameter#getValidMatchData")
     @DisplayName("build and save match object with valid match data")
     @Transactional
-    public void buildAndSaveMatchObjectWithValidParserResult(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithValidParserResult(IEventData parserResult) {
         assertNotNull(factory);
 
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
@@ -48,7 +48,7 @@ public class SamsFactoryTest {
     @MethodSource("volleyball.TestParameter#getInvalidMatchData")
     @DisplayName("build and save match object with invalid match data")
     @Transactional
-    public void buildAndSaveMatchObjectWithInvalidParserResult(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithInvalidParserResult(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
         assertFalse(match.isPresent());
 
@@ -65,7 +65,7 @@ public class SamsFactoryTest {
     @MethodSource("volleyball.TestParameter#getInvalidResultData")
     @DisplayName("build and save match object with invalid result data")
     @Transactional
-    public void buildAndSaveMatchObjectWithInvalidResultData(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithInvalidResultData(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
         assertTrue(match.isPresent());
 

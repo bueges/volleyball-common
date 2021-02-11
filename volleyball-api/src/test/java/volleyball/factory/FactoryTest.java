@@ -6,12 +6,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import volleyball.TestApplication;
 import volleyball.TestData;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.parser.IParserResult;
-import volleyball.tools.parser.ParserResult;
+import volleyball.tools.eventData.IEventData;
+import volleyball.tools.eventData.EventData;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class FactoryTest {
     @DisplayName("build and save match object with complete parser result")
     @Transactional
     public void buildAndSaveMatchObjectWithCompleteParserResult() {
-        IParserResult parserResult = ParserResult.builder()
+        IEventData parserResult = EventData.builder()
                 .withAssociationName(TestData.ASSOCIATION_NAME)
                 .withSeasonStartYear(TestData.SEASON_START_YEAR)
                 .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -62,7 +61,7 @@ public class FactoryTest {
     @MethodSource("volleyball.TestData#getRequiredData")
     @DisplayName("build and save match object with required data")
     @Transactional
-    public void buildAndSaveMatchObjectWithRequiredData(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithRequiredData(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
         assertTrue(match.isPresent());
         assertEquals(1, repository.getMatchObjects().size());
@@ -72,7 +71,7 @@ public class FactoryTest {
     @MethodSource("volleyball.TestData#getInvalidSeasonData")
     @DisplayName("build and save match object with invalid season data")
     @Transactional
-    public void buildAndSaveMatchObjectWithInvalidSeasonData(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithInvalidSeasonData(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
 
         assertTrue(match.isPresent());
@@ -84,7 +83,7 @@ public class FactoryTest {
     @MethodSource("volleyball.TestData#getInvalidResultData")
     @DisplayName("build and save match object with invalid result data")
     @Transactional
-    public void buildAndSaveMatchObjectWithInvalidResultData(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithInvalidResultData(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
 
         assertTrue(match.isPresent());
@@ -96,7 +95,7 @@ public class FactoryTest {
     @MethodSource("volleyball.TestData#getInvalidMatchData")
     @DisplayName("build and save match object with invalid match data")
     @Transactional
-    public void buildAndSaveMatchObjectWithInvalidMatchData(IParserResult parserResult) {
+    public void buildAndSaveMatchObjectWithInvalidMatchData(IEventData parserResult) {
         Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
 
         assertFalse(match.isPresent());

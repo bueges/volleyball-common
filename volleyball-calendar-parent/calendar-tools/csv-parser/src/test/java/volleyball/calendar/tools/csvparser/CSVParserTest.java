@@ -3,9 +3,7 @@ package volleyball.calendar.tools.csvparser;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import volleyball.tools.parser.IParserResult;
+import volleyball.tools.eventData.IEventData;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,11 +21,11 @@ public class CSVParserTest {
         Path csvFilePath = Paths.get("src", "test", "resources", "csvParser", "PlayingSchedule.csv");
         CSVParser csvParser = new CSVParser("TEST ASSOCIATION", csvFilePath);
 
-        List<IParserResult> parserResultList = csvParser.parseFile();
-        assertNotNull(parserResultList);
-        assertTrue(parserResultList.size() > 0);
+        List<IEventData> eventDataList = csvParser.parseFile();
+        assertNotNull(eventDataList);
+        assertTrue(eventDataList.size() > 0);
 
-        IParserResult parserResult = parserResultList.get(0);
+        IEventData parserResult = eventDataList.get(0);
         assertEquals("TEST ASSOCIATION", parserResult.getAssociationName().get());
         assertEquals(2020, parserResult.getSeasonStartYear().get());
         assertEquals(2021, parserResult.getSeasonEndYear().get());

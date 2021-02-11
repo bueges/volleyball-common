@@ -1,6 +1,6 @@
 package volleyball;
 
-import volleyball.tools.parser.ParserResult;
+import volleyball.tools.eventData.EventData;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
@@ -34,10 +34,10 @@ public class TestParameter {
     public static final String TEAM2_NAME = "team2";
 
     // factory test parameter
-    public static Stream<ParserResult> getValidMatchData() {
+    public static Stream<EventData> getValidMatchData() {
         return Stream.of(
                 // with result
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -53,7 +53,7 @@ public class TestParameter {
                         .build(),
 
                 // without result
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -70,10 +70,10 @@ public class TestParameter {
         );
     }
 
-    public static Stream<ParserResult> getInvalidMatchData() {
+    public static Stream<EventData> getInvalidMatchData() {
         return Stream.of(
                 // without association name
-                ParserResult.builder()
+                EventData.builder()
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
                         .withCompetitionName(COMPETITION_NAME)
@@ -86,7 +86,7 @@ public class TestParameter {
                         .build(),
 
                 // without season start year
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonEndYear(SEASON_END_YEAR)
                         .withCompetitionName(COMPETITION_NAME)
@@ -101,7 +101,7 @@ public class TestParameter {
                         .build(),
 
                 // without season end year
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withCompetitionName(COMPETITION_NAME)
@@ -116,7 +116,7 @@ public class TestParameter {
                         .build(),
 
                 // without competition name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -131,7 +131,7 @@ public class TestParameter {
                         .build(),
 
                 // without match number
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -146,7 +146,7 @@ public class TestParameter {
                         .build(),
 
                 // without match date tim
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -161,7 +161,7 @@ public class TestParameter {
                         .build(),
 
                 // without first club name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -176,7 +176,7 @@ public class TestParameter {
                         .build(),
 
                 // without first team name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -191,7 +191,7 @@ public class TestParameter {
                         .build(),
 
                 // without second club name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -206,7 +206,7 @@ public class TestParameter {
                         .build(),
 
                 // without second team name
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -222,10 +222,10 @@ public class TestParameter {
         );
     }
 
-    public static Stream<ParserResult> getInvalidResultData() {
+    public static Stream<EventData> getInvalidResultData() {
         return Stream.of(
                 // without sets first team
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
@@ -240,7 +240,7 @@ public class TestParameter {
                         .build(),
 
                 // without sets second team
-                ParserResult.builder()
+                EventData.builder()
                         .withAssociationName(ASSOCIATION_NAME)
                         .withSeasonStartYear(SEASON_START_YEAR)
                         .withSeasonEndYear(SEASON_END_YEAR)
