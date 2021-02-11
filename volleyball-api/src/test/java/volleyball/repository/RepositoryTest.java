@@ -9,6 +9,7 @@ import volleyball.TestApplication;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 import volleyball.model.result.Result;
 import volleyball.model.season.Season;
@@ -28,9 +29,11 @@ public class RepositoryTest {
     Repository manager;
 
     @Test
-    @DisplayName("save match object")
+    @DisplayName("save event object")
     @Transactional
-    public void saveMatchObject() {
+
+    public void saveEventObject() {
+        assertEquals(0, manager.getEventObjects().size());
         assertEquals(0, manager.getAssociationObjects().size());
         assertEquals(0, manager.getSeasonObjects().size());
         assertEquals(0, manager.getCompetitionObjects().size());
@@ -113,6 +116,21 @@ public class RepositoryTest {
         Optional<Match> savedMatch = manager.saveMatchObject(match);
         assertTrue(savedMatch.isPresent());
         assertEquals(1, manager.getMatchObjects().size());
+
+        Event event = Event.builder()
+                .withMatch(match)
+                .build();
+        Optional<Event> savedEvent = manager.saveEventObject(event);
+        assertTrue(savedEvent.isPresent());
+        assertEquals(1, manager.getEventObjects().size());
+    }
+
+    @Test
+    @DisplayName("save NULL event object")
+    @Transactional
+    public void saveNULLEventObject() {
+        Optional<Event> savedEvent = manager.saveEventObject(null);
+        assertFalse(savedEvent.isPresent());
     }
 
     @Test

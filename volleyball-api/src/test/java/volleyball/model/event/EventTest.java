@@ -3,11 +3,15 @@ package volleyball.model.event;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
+import volleyball.model.competition.Competition;
 import volleyball.model.match.Match;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static volleyball.TestData.COMPETITION_NAME;
 
 @Slf4j
 class EventTest {
@@ -29,5 +33,31 @@ class EventTest {
     @DisplayName("check NullPointerException when create event with null match")
     public void testCheckNullPointerExceptionWhenCreateEventWithNULLMatch() {
         assertThrows(NullPointerException.class, () -> new Event(null, null));
+    }
+
+    @Test
+    @DisplayName("compare events with same ID")
+    public void compareEventsWithSameID() {
+        Event event1 = new Event(1, match);
+        Event event2 = new Event(1, Mockito.mock(Match.class));
+
+        log.info("compare events : ");
+        log.info("event 1 : {}", event1);
+        log.info("event 2 : {}", event2);
+
+        assertEquals(event1, event2);
+    }
+
+    @Test
+    @DisplayName("compare events with different ID")
+    public void compareEventsWithDifferentID() {
+        Event event1 = new Event(1, match);
+        Event event2 = new Event(2, match);
+
+        log.info("compare events : ");
+        log.info("event 1 : {}", event1);
+        log.info("event 2 : {}", event2);
+
+        assertNotEquals(event1, event2);
     }
 }
