@@ -33,6 +33,11 @@ public class AthleteCalendar implements IEventCalendar {
     @EqualsAndHashCode.Exclude
     private List<Team> teamList = Lists.newArrayList();
 
+    /**
+     * add an team reference to the list
+     *
+     * @param team the {@link Team} object to add
+     */
     public void addTeam(Team team) {
         if (!teamList.contains(team)) {
             log.info("add team {} to teamlist.", team);
@@ -40,6 +45,11 @@ public class AthleteCalendar implements IEventCalendar {
         }
     }
 
+    /**
+     * remove a team reference from the list
+     *
+     * @param team -  the {@link Team} object to remove
+     */
     public void removeTeam(Team team) {
         if (teamList.contains(team)) {
             log.info("remove team {} from teamlist.", team);
