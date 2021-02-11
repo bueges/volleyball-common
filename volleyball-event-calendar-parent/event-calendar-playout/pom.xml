@@ -11,8 +11,7 @@
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-event-calendar</groupId>
-    <artifactId>calendar-playout</artifactId>
+    <artifactId>event-calendar-playout</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->

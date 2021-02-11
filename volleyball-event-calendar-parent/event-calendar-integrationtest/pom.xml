@@ -11,14 +11,13 @@
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-event-calendar</groupId>
-    <artifactId>calendar-integrationtest</artifactId>
+    <artifactId>event-calendar-integrationtest</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
             <groupId>volleyball-event-calendar</groupId>
-            <artifactId>calendar-importer</artifactId>
+            <artifactId>event-calendar-importer</artifactId>
             <version>${revision}</version>
         </dependency>
 

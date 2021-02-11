@@ -8,11 +8,10 @@
     <parent>
         <groupId>volleyball-event-calendar</groupId>
         <artifactId>volleyball-event-calendar-parent</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-event-calendar</groupId>
-    <artifactId>calendar-importer</artifactId>
+    <artifactId>event-calendar-importer</artifactId>
 
     <dependencies>
         <!-- internal dependencies -->

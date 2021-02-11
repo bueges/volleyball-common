@@ -12,7 +12,6 @@
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-event-calendar</groupId>
     <artifactId>event-calendar-factory</artifactId>
     <packaging>pom</packaging>
 
