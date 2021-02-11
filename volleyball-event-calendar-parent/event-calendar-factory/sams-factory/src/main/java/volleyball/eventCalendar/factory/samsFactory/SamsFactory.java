@@ -16,7 +16,7 @@ import java.util.Optional;
 public class SamsFactory extends Factory implements IModelFactory {
 
     @Autowired
-    Repository repositoryManager;
+    Repository repository;
 
     @Override
     public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
@@ -75,7 +75,7 @@ public class SamsFactory extends Factory implements IModelFactory {
             return Optional.empty();
         }
 
-        if (!isMatchNumberPresent.test(parserResult)){
+        if (!isMatchNumberPresent.test(parserResult)) {
             log.error("the required match number can't be empty -  so return an empty object");
             return Optional.empty();
         }
