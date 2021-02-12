@@ -20,30 +20,30 @@ import static volleyball.repository.RepositoryTestUtils.checkRepositorySize;
 class IAthleteRepositoryTest {
 
     @Autowired
-    IAthleteRepository memberRepository;
+    IAthleteRepository athleteRepository;
 
     @BeforeEach
     public void init() {
-        checkRepositorySize(memberRepository, 0);
+        checkRepositorySize(athleteRepository, 0);
 
-        Athlete member = Athlete.builder()
+        Athlete athlete = Athlete.builder()
                 .withName(ATHLETE_NAME)
                 .withPreName(ATHLETE_PRENAME)
                 .withBirthday(ATHLETE_BIRTHDAY)
                 .withGender(ATHLETE_GENDER)
                 .build();
-        log.info("build member object : {}", member);
+        log.info("build athlete object : {}", athlete);
 
-        member = memberRepository.saveObject(member);
-        log.info("saved member : {}", member);
+        athlete = athleteRepository.saveObject(athlete);
+        log.info("saved athlete : {}", athlete);
 
-        checkRepositorySize(memberRepository, 1);
+        checkRepositorySize(athleteRepository, 1);
     }
 
     @Test
-    @DisplayName("save same member object again")
+    @DisplayName("save same athlete object again")
     @Transactional
-    public void saveSameMemberObjectAgain() {
+    public void saveSameAthleteObjectAgain() {
         Athlete member2 = Athlete.builder()
                 .withName(ATHLETE_NAME)
                 .withPreName(ATHLETE_PRENAME)
@@ -52,16 +52,16 @@ class IAthleteRepositoryTest {
                 .build();
         log.info("build member object : {}", member2);
 
-        member2 = memberRepository.saveObject(member2);
+        member2 = athleteRepository.saveObject(member2);
         log.info("saved member : {}", member2);
 
-        checkRepositorySize(memberRepository, 1);
+        checkRepositorySize(athleteRepository, 1);
     }
 
     @Test
-    @DisplayName("save NULL member object and check NPE")
+    @DisplayName("save NULL athlete object and check NPE")
     @Transactional
-    public void saveNULLMemberObjectAndCheckNPE() {
-        assertThrows(NullPointerException.class, () -> memberRepository.saveObject(null));
+    public void saveNULLAthleteObjectAndCheckNPE() {
+        assertThrows(NullPointerException.class, () -> athleteRepository.saveObject(null));
     }
 }

@@ -72,6 +72,7 @@ public class EventCalendarControllerTest {
 
     @Test
     @DisplayName("get athlete calendar")
+    @Transactional
     public void getAthleteCalendar(){
         controller.init();
 
