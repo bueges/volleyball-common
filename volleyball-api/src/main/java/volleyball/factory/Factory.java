@@ -321,7 +321,7 @@ public class Factory implements IModelFactory {
      */
     protected Optional<Team> buildAndSaveTeam2Object(IEventData parserResult) {
         if (!isSecondTeamNamePresent.test(parserResult)) {
-            log.error("the required team name can't be empty -  so return an empty object");
+            log.error("the required team name can't be empty - so return an empty object");
             return Optional.empty();
         }
 
@@ -336,7 +336,7 @@ public class Factory implements IModelFactory {
     }
 
     @Override
-    public Optional<Athlete> buildAndSaveMemberObject(IEventData parserResult) {
+    public Optional<Athlete> buildAndSaveAthleteObject(IEventData parserResult) {
         return Optional.empty();
     }
 }

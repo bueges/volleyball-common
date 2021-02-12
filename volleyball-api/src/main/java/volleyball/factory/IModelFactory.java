@@ -22,5 +22,5 @@ public interface IModelFactory {
      * @param parserResult - the parsed data
      * @return the saved {@link Athlete} object or an empty object
      */
-    Optional<Athlete> buildAndSaveMemberObject(IEventData parserResult);
+    Optional<Athlete> buildAndSaveAthleteObject(IEventData parserResult);
 }
