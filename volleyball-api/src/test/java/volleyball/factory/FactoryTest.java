@@ -7,7 +7,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.TestData;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.match.Match;
+import volleyball.modelData.athleteData.AthleteData;
+import volleyball.modelData.athleteData.IAthleteData;
 import volleyball.repository.Repository;
 import volleyball.modelData.eventData.IEventData;
 import volleyball.modelData.eventData.EventData;
@@ -27,10 +30,24 @@ public class FactoryTest {
     Factory factory;
 
     @Test
+    @DisplayName("build and save athlete object")
+    public void buildAndSaveAthleteObjet(){
+        IAthleteData athleteData = AthleteData.builder()
+                .withAthleteName(TestData.ATHLETE_NAME)
+                .withAthletePreName(TestData.ATHLETE_PRENAME)
+                .withAthleteBirthday(TestData.ATHLETE_BIRTHDAY)
+                .withAthleteGender(TestData.ATHLETE_GENDER)
+                .build();
+
+        Optional<Athlete> athlete = factory.buildAndSaveAthleteObject(athleteData);
+        assertTrue(athlete.isPresent());
+    }
+
+    @Test
     @DisplayName("build and save match object with complete parser result")
     @Transactional
     public void buildAndSaveMatchObjectWithCompleteParserResult() {
-        IEventData parserResult = EventData.builder()
+        IEventData eventData = EventData.builder()
                 .withAssociationName(TestData.ASSOCIATION_NAME)
                 .withSeasonStartYear(TestData.SEASON_START_YEAR)
                 .withSeasonEndYear(TestData.SEASON_END_YEAR)
@@ -45,7 +62,7 @@ public class FactoryTest {
                 .withSetsTeam2(TestData.RESULT_TEAM2_SETS)
                 .build();
 
-        Optional<Match> match = factory.buildAndSaveMatchObject(parserResult);
+        Optional<Match> match = factory.buildAndSaveMatchObject(eventData);
         assertTrue(match.isPresent());
 
         assertEquals(1, repository.getMatchObjects().size());
