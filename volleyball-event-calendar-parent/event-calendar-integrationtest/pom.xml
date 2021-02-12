@@ -3,16 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId></groupId>
 
     <!-- parent project -->
     <parent>
-        <groupId>volleyball</groupId>
-        <artifactId>volleyball-parent</artifactId>
+        <groupId>volleyball-event-calendar</groupId>
+        <artifactId>volleyball-event-calendar-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>volleyball-event-calendar</groupId>
     <artifactId>event-calendar-integrationtest</artifactId>
+
 
     <dependencies>
         <!-- internal dependencies -->
@@ -33,7 +34,6 @@
             <artifactId>event-calendar-service</artifactId>
             <version>${revision}</version>
         </dependency>
-
 
         <!--test dependencies -->
         <dependency>

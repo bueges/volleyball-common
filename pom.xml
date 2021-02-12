@@ -24,7 +24,6 @@
     <modules>
         <module>volleyball-api</module>
         <module>volleyball-event-calendar-parent</module>
-        <module>volleyball-event-calendar-integrationtest</module>
     </modules>
 
     <dependencyManagement>

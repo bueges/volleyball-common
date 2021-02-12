@@ -1,5 +1,6 @@
 package volleyball.eventCalendar.integrationtest;
 
+import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import volleyball.TestData;
+import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
 import volleyball.eventCalendar.service.EventCalendarController;
 import volleyball.model.association.Association;
 import volleyball.model.athlete.Athlete;
@@ -14,9 +16,12 @@ import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.match.Match;
 import volleyball.model.team.Team;
+import volleyball.modelData.athleteData.AthleteData;
+import volleyball.modelData.athleteData.IAthleteData;
 import volleyball.repository.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static volleyball.TestData.*;
@@ -31,7 +36,7 @@ public class EventCalendarControllerTest {
     Repository repository;
 
     @Autowired
-
+    SamsFactory samsFactory;
 
     @Test
     @DisplayName("download and parse data from different csv sources")
@@ -70,15 +75,18 @@ public class EventCalendarControllerTest {
     public void getAthleteCalendar(){
         controller.init();
 
-        Athlete athlete = Athlete.builder()
-                .withName(ATHLETE_NAME)
-                .withPreName(ATHLETE_PRENAME)
-                .withGender(ATHLETE_GENDER)
-                .withBirthday(ATHLETE_BIRTHDAY)
+        IAthleteData athleteData = AthleteData.builder()
+                .withAthleteName(TestData.ATHLETE_NAME)
+                .withAthletePreName(TestData.ATHLETE_PRENAME)
+                .withAthleteBirthday(TestData.ATHLETE_BIRTHDAY)
+                .withAthleteGender(TestData.ATHLETE_GENDER)
                 .build();
+        Athlete athlete = samsFactory.buildAndSaveAthleteObject(athleteData).get();
 
+        Team team = repository.getTeamObjects().get(0);
+        team.setAthleteList(Lists.newArrayList(athlete));
+        Optional<Team> savedTeam = repository.saveTeamObject(team);
 
-
-
+        controller.getAthleteCalendar(athlete);
     }
 }
