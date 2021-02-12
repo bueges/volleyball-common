@@ -16,17 +16,24 @@
 
     <dependencies>
         <!-- internal dependencies -->
-<!--        <dependency>-->
-<!--            <groupId>volleyball-event-calendar</groupId>-->
-<!--            <artifactId>event-calendar-importer</artifactId>-->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>volleyball-event-calendar</groupId>
+            <artifactId>sams-factory</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <dependency>
             <groupId>volleyball-event-calendar</groupId>
-            <artifactId>event-calendar</artifactId>
+            <artifactId>csv-parser</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>volleyball-event-calendar</groupId>
+            <artifactId>event-calendar-service</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
 
         <!--test dependencies -->
         <dependency>

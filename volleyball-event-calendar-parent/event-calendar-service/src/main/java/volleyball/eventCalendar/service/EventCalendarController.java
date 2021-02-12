@@ -3,16 +3,23 @@ package volleyball.eventCalendar.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
 import volleyball.eventCalendar.service.configuration.Configuration;
 import volleyball.eventCalendar.tools.csvparser.CSVParser;
+import volleyball.model.athlete.Athlete;
+import volleyball.model.match.Match;
+import volleyball.repository.Repository;
 import volleyball.tools.downloader.FileDownloader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -24,8 +31,12 @@ public class EventCalendarController {
     @Autowired
     Configuration configuration;
 
+    @Autowired
+    Repository repository;
+
     @GetMapping("/init")
     public void init() {
+        log.debug("init controller");
         configuration.getCsvConfigurationList()
                 .forEach(configuration -> {
                             try {
@@ -44,6 +55,15 @@ public class EventCalendarController {
                 );
     }
 
-    @GetMapping("/")
+    @GetMapping("/athleteCalendar")
+    public void getAthleteCalendar(@RequestParam Athlete athlete) {
+        Predicate<Match> isAthleteMemberOfTeam = m -> m.getTeam1().getAthleteList().contains(athlete) ||
+                m.getTeam2().getAthleteList().contains(athlete);
 
+        List<Match> matchList = repository.getMatchObjects();
+        log.info("found {} matches", matchList.size());
+
+        List<Match> filteredMatchList = matchList.stream().filter(isAthleteMemberOfTeam).collect(Collectors.toList());
+        log.info("filtered {} matches", filteredMatchList.size());
+    }
 }

@@ -1,11 +1,13 @@
 package volleyball.factory;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
+import volleyball.model.match.IMatch;
 import volleyball.model.match.Match;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.result.Result;
@@ -13,7 +15,9 @@ import volleyball.model.season.Season;
 import volleyball.model.team.Team;
 import volleyball.repository.Repository;
 import volleyball.tools.eventData.IEventData;
+import volleyball.tools.parser.IParser;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -104,6 +108,20 @@ public class Factory implements IModelFactory {
      * test if the {@link IEventData} contains the second team name
      */
     protected Predicate<IEventData> isSecondTeamNamePresent = data -> data.getTeam2Name().isPresent();
+
+    @Override
+    public List<Match> parseDataAndSaveObjects(IParser parser) {
+        List<IEventData> eventDataList = parser.parseFile();
+        List<Match> matchList = Lists.newLinkedList();
+
+        eventDataList.forEach(eventData -> {
+            Optional<Match> savedMatch = buildAndSaveMatchObject(eventData);
+            if (savedMatch.isPresent())
+                matchList.add(savedMatch.get());
+        });
+
+        return matchList;
+    }
 
     @Override
     public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
