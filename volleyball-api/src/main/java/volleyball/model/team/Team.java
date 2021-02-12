@@ -1,12 +1,16 @@
 package volleyball.model.team;
 
+import com.google.common.collect.Lists;
 import lombok.*;
+import volleyball.model.athlete.Athlete;
+import volleyball.model.athlete.IAthlete;
 import volleyball.model.club.Club;
 import volleyball.model.club.IClub;
 import volleyball.model.competition.Competition;
 import volleyball.model.competition.ICompetition;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -37,6 +41,11 @@ public class Team implements ITeam {
     @ManyToOne(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     private Competition competition;
+
+    //optional field
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Getter
+    private List<Athlete> athleteList = Lists.newArrayList();
 
     public Optional<IClub> getClub() {
         return Optional.ofNullable(club);

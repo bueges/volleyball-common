@@ -1,11 +1,14 @@
 package volleyball.model.team;
 
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 
@@ -22,7 +25,7 @@ class TeamTest {
     @Test
     @DisplayName("create team with valid name")
     public void createTeamWithValidName() {
-        Team team = new Team(null, TEAM1_NAME, CLUB, COMPETITION);
+        Team team = new Team(null, TEAM1_NAME, CLUB, COMPETITION, Lists.newArrayList());
         log.info("create team : {}", team);
 
         assertNotNull(team);
@@ -40,13 +43,13 @@ class TeamTest {
     @Test
     @DisplayName("check NullPointerException when create team with NULL name")
     public void testCheckNullPointerExceptionWhenCreateTeamWithNULLName() {
-        assertThrows(NullPointerException.class, () -> new Team(null, null, CLUB, COMPETITION));
+        assertThrows(NullPointerException.class, () -> new Team(null, null, CLUB, COMPETITION, Lists.newArrayList()));
     }
 
     @Test
     @DisplayName("create team without club")
     public void createTeamWithoutClub() {
-        Team team = new Team(null, TEAM1_NAME, null, COMPETITION);
+        Team team = new Team(null, TEAM1_NAME, null, COMPETITION, Lists.newArrayList());
         log.info("create team : {}", team);
 
         assertNotNull(team.getClub());
@@ -56,21 +59,32 @@ class TeamTest {
     @Test
     @DisplayName("create team without competition")
     public void createTeamWithoutCompetition() {
-        Team team = new Team(null, TEAM1_NAME, CLUB, null);
+        Team team = new Team(null, TEAM1_NAME, CLUB, null, Lists.newArrayList());
         log.info("create team : {}", team);
 
         assertNotNull(team.getCompetition());
         assertFalse(team.getCompetition().isPresent());
     }
 
+    @Test
+    @DisplayName("create team with athlete list")
+    public void createTeamWithAthleteList() {
+        Athlete athlete1 = Mockito.mock(Athlete.class);
+        Athlete athlete2 = Mockito.mock(Athlete.class);
+        Team team = new Team(null, TEAM1_NAME, CLUB, null, Lists.newArrayList(athlete1, athlete2));
+
+        assertNotNull(team.getAthleteList());
+        assertEquals(2, team.getAthleteList().size());
+    }
+
     @ParameterizedTest
     @MethodSource("volleyball.TestData#getTeamName")
     @DisplayName("compare two teams with same ID")
     public void compareTwoTeamsWithSameID(String secondTeamName) {
-        Team team1 = new Team(1, TEAM1_NAME, CLUB, COMPETITION);
-        Team team2 = new Team(1, secondTeamName, CLUB, COMPETITION);
-        Team team3 = new Team(1, secondTeamName, null, COMPETITION);
-        Team team4 = new Team(1, secondTeamName, CLUB, null);
+        Team team1 = new Team(1, TEAM1_NAME, CLUB, COMPETITION, Lists.newArrayList());
+        Team team2 = new Team(1, secondTeamName, CLUB, COMPETITION, Lists.newArrayList());
+        Team team3 = new Team(1, secondTeamName, null, COMPETITION, Lists.newArrayList());
+        Team team4 = new Team(1, secondTeamName, CLUB, null, Lists.newArrayList());
 
         log.info("compare team : ");
         log.info("team 1 : {}", team1);
@@ -87,10 +101,10 @@ class TeamTest {
     @MethodSource("volleyball.TestData#getTeamName")
     @DisplayName("compare two teams with different ID")
     public void compareTwoTeamsWithDifferentID(String secondTeamName) {
-        Team team1 = new Team(1, TEAM1_NAME, CLUB, COMPETITION);
-        Team team2 = new Team(2, secondTeamName, CLUB, COMPETITION);
-        Team team3 = new Team(3, secondTeamName, null, COMPETITION);
-        Team team4 = new Team(4, secondTeamName, CLUB, null);
+        Team team1 = new Team(1, TEAM1_NAME, CLUB, COMPETITION, Lists.newArrayList());
+        Team team2 = new Team(2, secondTeamName, CLUB, COMPETITION, Lists.newArrayList());
+        Team team3 = new Team(3, secondTeamName, null, COMPETITION, Lists.newArrayList());
+        Team team4 = new Team(4, secondTeamName, CLUB, null, Lists.newArrayList());
 
         log.info("compare team : ");
         log.info("team 1 : {}", team1);

@@ -1,5 +1,6 @@
 package volleyball.repository.match;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,6 +54,7 @@ class IMatchRepositoryTest {
 
         team2 = Team.builder()
                 .withName(TEAM2_NAME)
+                .withAthleteList(Lists.newArrayList())
                 .build();
         log.info("build team object : {}", team2);
 

@@ -17,7 +17,7 @@ import static volleyball.repository.RepositoryTestUtils.checkRepositorySize;
 
 @SpringBootTest(classes = TestApplication.class)
 @Slf4j
-class IMemberRepositoryTest {
+class IAthleteRepositoryTest {
 
     @Autowired
     IAthleteRepository memberRepository;
