@@ -13,7 +13,7 @@ pipeline {
             stage('Build and Test') {
                 steps {
                     echo 'Building and testing ...'
-                    sh 'mvn clean test'
+                    sh 'mvn clean test -Dmaven.test.failure.ignore=false'
                 }
             }
 
