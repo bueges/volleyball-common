@@ -45,6 +45,7 @@ public class Team implements ITeam {
     //optional field
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Getter
+    @Setter
     @Singular("athlete")
     private List<Athlete> athleteList = Lists.newArrayList();
 

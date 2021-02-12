@@ -111,16 +111,14 @@ class ITeamRepositoryTest {
     @Transactional
     public void saveTeamObjectWithAthlete() {
         Team team2 = Team.builder()
-                .withName(TEAM1_NAME)
-                .withClub(club)
-                .withCompetition(competition)
+                .withName(TEAM2_NAME)
                 .withAthlete(athlete)
                 .build();
         log.info("build team object : {}", team2);
 
         team2 = teamRepository.saveObject(team2);
         log.info("saved team : {}", team2);
-        checkRepositorySize(teamRepository, 1);
+        checkRepositorySize(teamRepository, 2);
 
         assertNotNull(team2.getAthleteList());
         assertEquals(1, team2.getAthleteList().size());

@@ -37,6 +37,7 @@ public interface ITeamRepository extends JpaRepository<Team, Integer> {
                 .findFirst();
 
         if (searchResult.isPresent()) {
+            searchResult.get().setAthleteList(team.getAthleteList());
             return searchResult.get();
         } else {
             return save(team);
