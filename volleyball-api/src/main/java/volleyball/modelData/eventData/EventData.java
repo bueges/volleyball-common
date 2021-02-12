@@ -1,4 +1,4 @@
-package volleyball.tools.eventData;
+package volleyball.modelData.eventData;
 
 import lombok.AccessLevel;
 import lombok.Builder;

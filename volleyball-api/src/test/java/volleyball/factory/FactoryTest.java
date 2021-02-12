@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.TestData;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.eventData.IEventData;
-import volleyball.tools.eventData.EventData;
+import volleyball.modelData.eventData.IEventData;
+import volleyball.modelData.eventData.EventData;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

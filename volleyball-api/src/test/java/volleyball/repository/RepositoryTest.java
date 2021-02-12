@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.TestApplication;
 import volleyball.model.association.Association;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.event.Event;
@@ -29,9 +30,26 @@ public class RepositoryTest {
     Repository manager;
 
     @Test
+    @DisplayName("save athlete object")
+    @Transactional
+    public void saveAthleteObject() {
+        assertEquals(0, manager.getAthleteObjects().size());
+
+        Athlete athlete = Athlete.builder()
+                .withName(ATHLETE_NAME)
+                .withPreName(ATHLETE_PRENAME)
+                .withBirthday(ATHLETE_BIRTHDAY)
+                .withGender(ATHLETE_GENDER)
+                .build();
+        Optional<Athlete> savedAthlete = manager.saveAthleteObject(athlete);
+        assertTrue(savedAthlete.isPresent());
+        assertEquals(1, manager.getAthleteObjects().size());
+        assertTrue(savedAthlete.get().getId() > 0);
+    }
+
+    @Test
     @DisplayName("save event object")
     @Transactional
-
     public void saveEventObject() {
         assertEquals(0, manager.getEventObjects().size());
         assertEquals(0, manager.getAssociationObjects().size());
@@ -48,6 +66,7 @@ public class RepositoryTest {
         Optional<Association> saveAssociation = manager.saveAssociationObject(association);
         assertTrue(saveAssociation.isPresent());
         assertEquals(1, manager.getAssociationObjects().size());
+        assertTrue(saveAssociation.get().getId() > 0);
 
         Season season = Season.builder()
                 .withStartYear(SEASON_START_YEAR)
@@ -57,6 +76,7 @@ public class RepositoryTest {
         Optional<Season> savedSeason = manager.saveSeasonObject(season);
         assertTrue(savedSeason.isPresent());
         assertEquals(1, manager.getSeasonObjects().size());
+        assertTrue(savedSeason.get().getId() > 0);
 
         Competition competition = Competition.builder()
                 .withName(COMPETITION_NAME)
@@ -65,6 +85,7 @@ public class RepositoryTest {
         Optional<Competition> savedCompetition = manager.saveCompetitionObject(competition);
         assertTrue(savedCompetition.isPresent());
         assertEquals(1, manager.getCompetitionObjects().size());
+        assertTrue(savedCompetition.get().getId() > 0);
 
         Club club1 = Club.builder()
                 .withName(CLUB1_NAME)
@@ -72,6 +93,7 @@ public class RepositoryTest {
         Optional<Club> savedClub1 = manager.saveClubObject(club1);
         assertTrue(savedClub1.isPresent());
         assertEquals(1, manager.getClubObjects().size());
+        assertTrue(savedClub1.get().getId() > 0);
 
         Team team1 = Team.builder()
                 .withName(TEAM1_NAME)
@@ -81,6 +103,7 @@ public class RepositoryTest {
         Optional<Team> savedTeam1 = manager.saveTeamObject(team1);
         assertTrue(savedTeam1.isPresent());
         assertEquals(1, manager.getTeamObjects().size());
+        assertTrue(savedTeam1.get().getId() > 0);
 
         Club club2 = Club.builder()
                 .withName(CLUB2_NAME)
@@ -88,6 +111,7 @@ public class RepositoryTest {
         Optional<Club> savedClub2 = manager.saveClubObject(club2);
         assertTrue(savedClub2.isPresent());
         assertEquals(2, manager.getClubObjects().size());
+        assertTrue(savedClub2.get().getId() > 0);
 
         Team team2 = Team.builder()
                 .withName(TEAM2_NAME)
@@ -97,6 +121,7 @@ public class RepositoryTest {
         Optional<Team> savedTeam2 = manager.saveTeamObject(team2);
         assertTrue(savedTeam2.isPresent());
         assertEquals(2, manager.getTeamObjects().size());
+        assertTrue(savedTeam2.get().getId() > 0);
 
         Result result = Result.builder()
                 .withSetsTeam1(RESULT_TEAM1_SETS)
@@ -105,6 +130,7 @@ public class RepositoryTest {
         Optional<Result> savedResult = manager.saveResultObject(result);
         assertTrue(savedResult.isPresent());
         assertEquals(1, manager.getResultObjects().size());
+        assertTrue(savedResult.get().getId() > 0);
 
         Match match = Match.builder()
                 .withDateTime(MATCH_DATE_TIME)
@@ -116,6 +142,7 @@ public class RepositoryTest {
         Optional<Match> savedMatch = manager.saveMatchObject(match);
         assertTrue(savedMatch.isPresent());
         assertEquals(1, manager.getMatchObjects().size());
+        assertTrue(savedMatch.get().getId() > 0);
 
         Event event = Event.builder()
                 .withMatch(match)
@@ -123,6 +150,15 @@ public class RepositoryTest {
         Optional<Event> savedEvent = manager.saveEventObject(event);
         assertTrue(savedEvent.isPresent());
         assertEquals(1, manager.getEventObjects().size());
+        assertTrue(savedEvent.get().getId() > 0);
+    }
+
+    @Test
+    @DisplayName("save NULL athlete object")
+    @Transactional
+    public void saveNULLAthleteObject() {
+        Optional<Athlete> savedAthlete = manager.saveAthleteObject(null);
+        assertFalse(savedAthlete.isPresent());
     }
 
     @Test

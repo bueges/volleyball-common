@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import volleyball.eventCalendar.tools.csvparser.CSVParser;
-import volleyball.tools.eventData.IEventData;
+import volleyball.modelData.eventData.IEventData;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

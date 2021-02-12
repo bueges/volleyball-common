@@ -1,6 +1,7 @@
 package volleyball.repository;
 
 import volleyball.model.association.Association;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.event.Event;
@@ -101,4 +102,15 @@ public interface IRepository {
      * @return a list with {@link Event} objects
      */
     List<Event> getEventObjects();
+
+    /**
+     * @param athlete - the athlete to save
+     * @return the saved {@link Athlete} object
+     */
+    Optional<Athlete> saveAthleteObject(Athlete athlete);
+
+    /**
+     * @return a list with {@link Athlete} objects
+     */
+    List<Athlete> getAthleteObjects();
 }

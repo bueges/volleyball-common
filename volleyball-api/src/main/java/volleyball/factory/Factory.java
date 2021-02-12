@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
-import volleyball.model.match.IMatch;
 import volleyball.model.match.Match;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.result.Result;
 import volleyball.model.season.Season;
 import volleyball.model.team.Team;
+import volleyball.modelData.athleteData.IAthleteData;
 import volleyball.repository.Repository;
-import volleyball.tools.eventData.IEventData;
+import volleyball.modelData.eventData.IEventData;
 import volleyball.tools.parser.IParser;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.function.Predicate;
 public class Factory implements IModelFactory {
 
     @Autowired
-    Repository repositoryManager;
+    Repository repository;
 
     /**
      * test if the {@link IEventData} contains the association name
@@ -124,237 +124,246 @@ public class Factory implements IModelFactory {
     }
 
     @Override
-    public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
-        if (parserResult == null) {
+    public Optional<Match> buildAndSaveMatchObject(IEventData eventData) {
+        if (eventData == null) {
             log.error("the required parser data can't be NULL -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isMatchDateTimePresent.test(parserResult)) {
+        if (!isMatchDateTimePresent.test(eventData)) {
             log.error("the required match date time can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        Optional<Team> team1 = buildAndSaveTeam1Object(parserResult);
+        Optional<Team> team1 = buildAndSaveTeam1Object(eventData);
         if (!team1.isPresent()) {
             log.error("the first team is required and can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        Optional<Team> team2 = buildAndSaveTeam2Object(parserResult);
+        Optional<Team> team2 = buildAndSaveTeam2Object(eventData);
         if (!team2.isPresent()) {
             log.error("the second team is required and can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Match match = Match.builder()
-                .withDateTime(parserResult.getMatchDateTime().get())
+                .withDateTime(eventData.getMatchDateTime().get())
                 .withTeam1(team1.get())
                 .withTeam2(team2.get())
-                .withNumber(parserResult.getMatchNumber().orElse(""))
-                .withResult(buildAndSaveResult(parserResult).orElse(null))
+                .withNumber(eventData.getMatchNumber().orElse(""))
+                .withResult(buildAndSaveResult(eventData).orElse(null))
                 .build();
         log.info("build match : {}", match);
 
-        return repositoryManager.saveMatchObject(match);
+        return repository.saveMatchObject(match);
 
     }
 
     /**
      * build and save a {@link Association} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Association} object or an empty object
      */
-    protected Optional<Association> buildAndSaveAssociationObject(IEventData parserResult) {
-        if (!isAssociationNamePresent.test(parserResult)) {
+    protected Optional<Association> buildAndSaveAssociationObject(IEventData eventData) {
+        if (!isAssociationNamePresent.test(eventData)) {
             log.error("the required association name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Association association = Association.builder()
-                .withName(parserResult.getAssociationName().get())
+                .withName(eventData.getAssociationName().get())
                 .build();
         log.info("build association : {}", association);
 
-        return repositoryManager.saveAssociationObject(association);
+        return repository.saveAssociationObject(association);
     }
 
     /**
      * build and save a {@link Season} object
      *
-     * @param parserResult the parsed data
+     * @param eventData the event data
      * @return the saved {@link Season} object or an empty object
      */
-    protected Optional<Season> buildAndSaveSeasonObject(IEventData parserResult) {
-        if (!isSeasonPeriodPresent.test(parserResult)) {
+    protected Optional<Season> buildAndSaveSeasonObject(IEventData eventData) {
+        if (!isSeasonPeriodPresent.test(eventData)) {
             log.error("the required season period can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodAfterYear2000.test(parserResult)) {
+        if (!isSeasonPeriodAfterYear2000.test(eventData)) {
             log.error("the required season period can't be before year 2000 -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodInRightOrder.test(parserResult)) {
+        if (!isSeasonPeriodInRightOrder.test(eventData)) {
             log.error("the required season period has a wrong order -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodLengthRight.test(parserResult)) {
+        if (!isSeasonPeriodLengthRight.test(eventData)) {
             log.error("the required season period has a wrong length -  so return an empty object");
             return Optional.empty();
         }
 
         Season season = Season.builder()
-                .withStartYear(parserResult.getSeasonStartYear().get())
-                .withEndYear(parserResult.getSeasonEndYear().get())
-                .withAssociation(buildAndSaveAssociationObject(parserResult).orElse(null))
+                .withStartYear(eventData.getSeasonStartYear().get())
+                .withEndYear(eventData.getSeasonEndYear().get())
+                .withAssociation(buildAndSaveAssociationObject(eventData).orElse(null))
                 .build();
         log.info("build season : {}", season);
 
-        return repositoryManager.saveSeasonObject(season);
+        return repository.saveSeasonObject(season);
     }
 
     /**
      * build and save a {@link Competition} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Competition} object or an empty object
      */
-    protected Optional<Competition> buildAndSaveCompetitionObject(IEventData parserResult) {
-        if (!isCompetitionNamePresent.test(parserResult)) {
+    protected Optional<Competition> buildAndSaveCompetitionObject(IEventData eventData) {
+        if (!isCompetitionNamePresent.test(eventData)) {
             log.error("the required competition name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Competition competition = Competition.builder()
-                .withName(parserResult.getCompetitionName().get())
-                .withSeason(buildAndSaveSeasonObject(parserResult).orElse(null))
+                .withName(eventData.getCompetitionName().get())
+                .withSeason(buildAndSaveSeasonObject(eventData).orElse(null))
                 .build();
         log.info("build competition : {}", competition);
 
-        return repositoryManager.saveCompetitionObject(competition);
+        return repository.saveCompetitionObject(competition);
     }
 
     /**
      * build and save a {@link Result} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Result} object or an empty object
      */
-    protected Optional<Result> buildAndSaveResult(IEventData parserResult) {
-        if (!isResultPresent.test(parserResult)) {
+    protected Optional<Result> buildAndSaveResult(IEventData eventData) {
+        if (!isResultPresent.test(eventData)) {
             log.error("the required result can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isResultSetInRange.test(parserResult)) {
+        if (!isResultSetInRange.test(eventData)) {
             log.error("the required result set are not in range [0,3] -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isResultSetsEqualZero.test(parserResult) && isResultSetEqual.test(parserResult)) {
+        if (!isResultSetsEqualZero.test(eventData) && isResultSetEqual.test(eventData)) {
             log.error("the required result set can't be equal - so return an empty object");
             return Optional.empty();
         }
 
         Result result = Result.builder()
-                .withSetsTeam1(parserResult.getSetsTeam1().get())
-                .withSetsTeam2(parserResult.getSetsTeam2().get())
+                .withSetsTeam1(eventData.getSetsTeam1().get())
+                .withSetsTeam2(eventData.getSetsTeam2().get())
                 .build();
         log.info("build result : {}", result);
 
-        return repositoryManager.saveResultObject(result);
+        return repository.saveResultObject(result);
     }
 
     /**
      * build and save a {@link Club} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Club} object or an empty object
      */
-    protected Optional<Club> buildAndSaveClub1Object(IEventData parserResult) {
-        if (!isFirstClubNamePresent.test(parserResult)) {
+    protected Optional<Club> buildAndSaveClub1Object(IEventData eventData) {
+        if (!isFirstClubNamePresent.test(eventData)) {
             log.error("the required club name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Club club = Club.builder()
-                .withName(parserResult.getClub1Name().get())
+                .withName(eventData.getClub1Name().get())
                 .build();
         log.info("build club : {}", club);
 
-        return repositoryManager.saveClubObject(club);
+        return repository.saveClubObject(club);
     }
 
     /**
      * build and save a {@link Team} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Team} object or an empty object
      */
-    protected Optional<Team> buildAndSaveTeam1Object(IEventData parserResult) {
-        if (!isFirstTeamNamePresent.test(parserResult)) {
+    protected Optional<Team> buildAndSaveTeam1Object(IEventData eventData) {
+        if (!isFirstTeamNamePresent.test(eventData)) {
             log.error("the required team name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Team team = Team.builder()
-                .withName(parserResult.getTeam1Name().get())
-                .withClub(buildAndSaveClub1Object(parserResult).orElse(null))
-                .withCompetition(buildAndSaveCompetitionObject(parserResult).orElse(null))
+                .withName(eventData.getTeam1Name().get())
+                .withClub(buildAndSaveClub1Object(eventData).orElse(null))
+                .withCompetition(buildAndSaveCompetitionObject(eventData).orElse(null))
                 .build();
         log.info("build first team : {}", team);
 
-        return repositoryManager.saveTeamObject(team);
+        return repository.saveTeamObject(team);
     }
 
     /**
      * build and save a {@link Club} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Club} object or an empty object
      */
-    protected Optional<Club> buildAndSaveClub2Object(IEventData parserResult) {
-        if (!isSecondClubNamePresent.test(parserResult)) {
+    protected Optional<Club> buildAndSaveClub2Object(IEventData eventData) {
+        if (!isSecondClubNamePresent.test(eventData)) {
             log.error("the required club name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
         Club club = Club.builder()
-                .withName(parserResult.getClub2Name().get())
+                .withName(eventData.getClub2Name().get())
                 .build();
         log.info("build club : {}", club);
 
-        return repositoryManager.saveClubObject(club);
+        return repository.saveClubObject(club);
     }
 
     /**
      * build and save a {@link Team} object
      *
-     * @param parserResult - the parsed data
+     * @param eventData - the event data
      * @return the saved {@link Team} object or an empty object
      */
-    protected Optional<Team> buildAndSaveTeam2Object(IEventData parserResult) {
-        if (!isSecondTeamNamePresent.test(parserResult)) {
+    protected Optional<Team> buildAndSaveTeam2Object(IEventData eventData) {
+        if (!isSecondTeamNamePresent.test(eventData)) {
             log.error("the required team name can't be empty - so return an empty object");
             return Optional.empty();
         }
 
         Team team = Team.builder()
-                .withName(parserResult.getTeam2Name().get())
-                .withClub(buildAndSaveClub2Object(parserResult).orElse(null))
-                .withCompetition(buildAndSaveCompetitionObject(parserResult).orElse(null))
+                .withName(eventData.getTeam2Name().get())
+                .withClub(buildAndSaveClub2Object(eventData).orElse(null))
+                .withCompetition(buildAndSaveCompetitionObject(eventData).orElse(null))
                 .build();
         log.info("build team : {}", team);
 
-        return repositoryManager.saveTeamObject(team);
+        return repository.saveTeamObject(team);
     }
 
     @Override
-    public Optional<Athlete> buildAndSaveAthleteObject(IEventData parserResult) {
-        return Optional.empty();
+    public Optional<Athlete> buildAndSaveAthleteObject(IAthleteData athleteData) {
+        Athlete athlete = Athlete.builder()
+                .withName(athleteData.getAthleteName().orElse(""))
+                .withPreName(athleteData.getAthletePreName().orElse(""))
+                .withBirthday(athleteData.getAthleteBirthday().get())
+                .withGender(athleteData.getAthleteGender().get())
+                .build();
+
+        log.info("build athlete : {}", athlete);
+
+        return repository.saveAthleteObject(athlete);
     }
 }

@@ -1,12 +1,15 @@
 package volleyball.eventCalendar.integrationtest;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import volleyball.TestData;
 import volleyball.eventCalendar.service.EventCalendarController;
 import volleyball.model.association.Association;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.match.Match;
@@ -16,6 +19,7 @@ import volleyball.repository.Repository;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static volleyball.TestData.*;
 
 @SpringBootTest
 public class EventCalendarControllerTest {
@@ -25,6 +29,9 @@ public class EventCalendarControllerTest {
 
     @Autowired
     Repository repository;
+
+    @Autowired
+
 
     @Test
     @DisplayName("download and parse data from different csv sources")
@@ -56,5 +63,22 @@ public class EventCalendarControllerTest {
         List<Team> teamList = repository.getTeamObjects();
         assertNotNull(teamList);
         assertTrue(teamList.size() > 0);
+    }
+
+    @Test
+    @DisplayName("get athlete calendar")
+    public void getAthleteCalendar(){
+        controller.init();
+
+        Athlete athlete = Athlete.builder()
+                .withName(ATHLETE_NAME)
+                .withPreName(ATHLETE_PRENAME)
+                .withGender(ATHLETE_GENDER)
+                .withBirthday(ATHLETE_BIRTHDAY)
+                .build();
+
+
+
+
     }
 }

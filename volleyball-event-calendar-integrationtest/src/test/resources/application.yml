@@ -15,5 +15,6 @@ sams-configuration:
   csvConfigurationList:
     - associationName: TestAssociation
       playingScheduleURL: https://www.hvbv.de/servlet/league/PlayingScheduleCsvExport?matchSeriesId=9936936
+
     - associationName: TestAssociation
       playingScheduleURL: https://www.hvbv.de/servlet/league/PlayingScheduleCsvExport?matchSeriesId=9936848

@@ -1,6 +1,6 @@
 package volleyball;
 
-import volleyball.tools.eventData.EventData;
+import volleyball.modelData.eventData.EventData;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;

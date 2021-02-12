@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import volleyball.tools.parser.IParser;
-import volleyball.tools.eventData.IEventData;
-import volleyball.tools.eventData.EventData;
+import volleyball.modelData.eventData.IEventData;
+import volleyball.modelData.eventData.EventData;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

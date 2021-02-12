@@ -1,4 +1,4 @@
-package volleyball.tools.eventData;
+package volleyball.modelData.eventData;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package volleyball.tools.parser;
 
-import volleyball.tools.eventData.IEventData;
+import volleyball.modelData.eventData.IEventData;
 
 import java.util.List;
 

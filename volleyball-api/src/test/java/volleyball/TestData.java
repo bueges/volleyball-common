@@ -2,7 +2,7 @@ package volleyball;
 
 import org.springframework.data.util.Pair;
 import volleyball.model.athlete.Gender;
-import volleyball.tools.eventData.EventData;
+import volleyball.modelData.eventData.EventData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

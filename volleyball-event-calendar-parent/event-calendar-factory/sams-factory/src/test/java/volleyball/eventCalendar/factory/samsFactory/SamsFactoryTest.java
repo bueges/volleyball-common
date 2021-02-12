@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.eventData.IEventData;
+import volleyball.modelData.eventData.IEventData;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

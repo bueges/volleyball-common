@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import volleyball.model.association.Association;
+import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
 import volleyball.model.event.Event;
@@ -27,6 +28,9 @@ import java.util.Optional;
 @Component
 @Slf4j
 public class Repository implements IRepository {
+
+    @Autowired
+    IAthleteRepository athleteRepository;
 
     @Autowired
     IAssociationRepository associationRepository;
@@ -189,5 +193,22 @@ public class Repository implements IRepository {
     @Override
     public List<Event> getEventObjects() {
         return eventRepository.findAll();
+    }
+
+    @Override
+    public Optional<Athlete> saveAthleteObject(Athlete athlete) {
+        if (athlete == null) {
+            log.error("athlete object is NULL - so return empty object.");
+            return Optional.empty();
+        }
+
+        Athlete savedAthlete = athleteRepository.saveObject(athlete);
+        log.info("saved athlete object : {}", savedAthlete);
+        return Optional.ofNullable(savedAthlete);
+    }
+
+    @Override
+    public List<Athlete> getAthleteObjects() {
+        return athleteRepository.findAll();
     }
 }

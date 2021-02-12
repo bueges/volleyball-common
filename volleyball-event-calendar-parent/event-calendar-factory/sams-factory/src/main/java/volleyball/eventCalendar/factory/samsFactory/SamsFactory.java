@@ -7,7 +7,7 @@ import volleyball.factory.Factory;
 import volleyball.factory.IModelFactory;
 import volleyball.model.match.Match;
 import volleyball.repository.Repository;
-import volleyball.tools.eventData.IEventData;
+import volleyball.modelData.eventData.IEventData;
 
 import java.util.Optional;
 
@@ -19,67 +19,67 @@ public class SamsFactory extends Factory implements IModelFactory {
     Repository repository;
 
     @Override
-    public Optional<Match> buildAndSaveMatchObject(IEventData parserResult) {
-        if (!isAssociationNamePresent.test(parserResult)) {
+    public Optional<Match> buildAndSaveMatchObject(IEventData eventData) {
+        if (!isAssociationNamePresent.test(eventData)) {
             log.error("the required association name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodPresent.test(parserResult)) {
+        if (!isSeasonPeriodPresent.test(eventData)) {
             log.error("the required season period can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodAfterYear2000.test(parserResult)) {
+        if (!isSeasonPeriodAfterYear2000.test(eventData)) {
             log.error("the required season period can't be before year 2000 -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodInRightOrder.test(parserResult)) {
+        if (!isSeasonPeriodInRightOrder.test(eventData)) {
             log.error("the required season period has a wrong order -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSeasonPeriodLengthRight.test(parserResult)) {
+        if (!isSeasonPeriodLengthRight.test(eventData)) {
             log.error("the required season period has a wrong length -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isCompetitionNamePresent.test(parserResult)) {
+        if (!isCompetitionNamePresent.test(eventData)) {
             log.error("the required competition name can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isFirstClubNamePresent.test(parserResult)) {
+        if (!isFirstClubNamePresent.test(eventData)) {
             log.error("the required first club data can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isFirstTeamNamePresent.test(parserResult)) {
+        if (!isFirstTeamNamePresent.test(eventData)) {
             log.error("the required first team name data can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSecondClubNamePresent.test(parserResult)) {
+        if (!isSecondClubNamePresent.test(eventData)) {
             log.error("the required second club name data can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isSecondTeamNamePresent.test(parserResult)) {
+        if (!isSecondTeamNamePresent.test(eventData)) {
             log.error("the required second team name data can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isMatchDateTimePresent.test(parserResult)) {
+        if (!isMatchDateTimePresent.test(eventData)) {
             log.error("the required match date time can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        if (!isMatchNumberPresent.test(parserResult)) {
+        if (!isMatchNumberPresent.test(eventData)) {
             log.error("the required match number can't be empty -  so return an empty object");
             return Optional.empty();
         }
 
-        return super.buildAndSaveMatchObject(parserResult);
+        return super.buildAndSaveMatchObject(eventData);
     }
 }
