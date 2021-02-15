@@ -1,5 +1,6 @@
 package volleyball.factory;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,6 +32,7 @@ public class FactoryTest {
 
     @Test
     @DisplayName("build and save athlete object")
+    @Transactional
     public void buildAndSaveAthleteObjet(){
         IAthleteData athleteData = AthleteData.builder()
                 .withAthleteName(TestData.ATHLETE_NAME)
