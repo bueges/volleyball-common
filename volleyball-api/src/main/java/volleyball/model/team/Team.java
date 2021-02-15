@@ -43,8 +43,7 @@ public class Team implements ITeam {
     private Competition competition;
 
     //optional field
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Getter
     @Setter
     @Singular("athlete")

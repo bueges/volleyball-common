@@ -5,65 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
-import volleyball.eventCalendar.service.configuration.Configuration;
-import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.match.Match;
-import volleyball.repository.Repository;
-import volleyball.tools.downloader.FileDownloader;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
 public class EventCalendarController {
 
     @Autowired
-    SamsFactory samsFactory;
-
-    @Autowired
-    Configuration configuration;
-
-    @Autowired
-    Repository repository;
-
-    @GetMapping("/init")
-    public void init() {
-        log.debug("init controller");
-        configuration.getCsvConfigurationList()
-                .forEach(configuration -> {
-                            try {
-                                Optional<Path> path = FileDownloader.downloadFileFromURL(new URL(configuration.getPlayingScheduleURL()));
-
-                                if (path.isPresent()) {
-                                    log.info("import event data from {}", path.get().toFile().getPath());
-                                    CSVParser csvParser = new CSVParser(configuration.getAssociationName(), path.get());
-                                    csvParser.parseFile().forEach(eventData -> samsFactory.buildAndSaveMatchObject(eventData));
-                                }
-                            } catch (MalformedURLException e) {
-                                log.error(e.getMessage());
-                                e.printStackTrace();
-                            }
-                        }
-                );
-    }
+    EventCalendarService calendarService;
 
     @GetMapping("/athleteCalendar")
-    public void getAthleteCalendar(@RequestParam Athlete athlete) {
-        Predicate<Match> isAthleteMemberOfTeam = m -> m.getTeam1().getAthleteList().contains(athlete) ||
-                m.getTeam2().getAthleteList().contains(athlete);
-
-        List<Match> matchList = repository.getMatchObjects();
-        log.info("found {} matches", matchList.size());
-
-        List<Match> filteredMatchList = matchList.stream().filter(isAthleteMemberOfTeam).collect(Collectors.toList());
-        log.info("filtered {} matches", filteredMatchList.size());
+    public List<Match> getAthleteCalendar(@RequestParam Athlete athlete) {
+        return calendarService.getAthleteCalendar(athlete);
     }
 }

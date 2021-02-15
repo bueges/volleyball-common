@@ -1,6 +1,7 @@
 package volleyball.eventCalendar.integrationtest;
 
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import volleyball.TestData;
 import volleyball.eventCalendar.factory.samsFactory.SamsFactory;
 import volleyball.eventCalendar.service.EventCalendarController;
+import volleyball.eventCalendar.service.EventCalendarService;
 import volleyball.model.association.Association;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 import volleyball.model.team.Team;
 import volleyball.modelData.athleteData.AthleteData;
@@ -27,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static volleyball.TestData.*;
 
 @SpringBootTest
+@Slf4j
 public class EventCalendarControllerTest {
 
     @Autowired
@@ -42,8 +46,6 @@ public class EventCalendarControllerTest {
     @DisplayName("download and parse data from different csv sources")
     @Transactional
     public void downloadAndParseDataFromDifferentCSVSources() {
-        controller.init();
-
         // check associations
         List<Association> associationList = repository.getAssociationObjects();
         assertNotNull(associationList);
@@ -73,9 +75,7 @@ public class EventCalendarControllerTest {
     @Test
     @DisplayName("get athlete calendar")
     @Transactional
-    public void getAthleteCalendar(){
-        controller.init();
-
+    public void getAthleteCalendar() {
         IAthleteData athleteData = AthleteData.builder()
                 .withAthleteName(TestData.ATHLETE_NAME)
                 .withAthletePreName(TestData.ATHLETE_PRENAME)
@@ -85,9 +85,19 @@ public class EventCalendarControllerTest {
         Athlete athlete = samsFactory.buildAndSaveAthleteObject(athleteData).get();
 
         Team team = repository.getTeamObjects().get(0);
+        log.info("add {} to {}", athlete, team.getName());
         team.setAthleteList(Lists.newArrayList(athlete));
         Optional<Team> savedTeam = repository.saveTeamObject(team);
 
-        controller.getAthleteCalendar(athlete);
+        Team team2 = repository.getTeamObjects().get(10);
+        log.info("add {} to {}", athlete, team2.getName());
+        team2.setAthleteList(Lists.newArrayList(athlete));
+        Optional<Team> savedTeam2 = repository.saveTeamObject(team2);
+
+        List<Match> eventList = controller.getAthleteCalendar(athlete);
+        assertNotNull(eventList);
+
+        assertTrue(eventList.size() > 0);
+        eventList.forEach(e -> System.out.println(e.getTeam1().getName() + " vs. " + e.getTeam2().getName()));
     }
 }
