@@ -8,7 +8,6 @@ import volleyball.eventCalendar.service.configuration.Configuration;
 import volleyball.eventCalendar.tools.csvparser.CSVParser;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.event.Event;
-import volleyball.model.match.Match;
 import volleyball.repository.Repository;
 import volleyball.tools.downloader.FileDownloader;
 
@@ -41,14 +40,13 @@ public class EventCalendarService {
         log.debug("init event calendar service");
 
         configuration.getCsvConfigurationList()
-                .forEach(configuration -> {
+                .forEach((config) -> {
                             try {
-                                Optional<Path> path = FileDownloader.downloadFileFromURL(new URL(configuration.getPlayingScheduleURL()));
+                                Optional<Path> path = FileDownloader.downloadFileFromURL(new URL(config.getPlayingScheduleURL()));
 
                                 if (path.isPresent()) {
                                     log.info("import event data from {}", path.get().toFile().getPath());
-                                    CSVParser csvParser = new CSVParser(configuration.getAssociationName(), path.get());
-                                    csvParser.parseFile().forEach(eventData -> samsFactory.buildAndSaveMatchObject(eventData));
+                                    samsFactory.parseDataAndSaveEventObjects(new CSVParser(config.getAssociationName(), path.get()));
                                 }
                             } catch (MalformedURLException e) {
                                 log.error(e.getMessage());
@@ -58,17 +56,13 @@ public class EventCalendarService {
                 );
     }
 
-    public List<Match> getAthleteCalendar(Athlete athlete) {
-        Predicate<Match> isAthleteMemberOfEventMatch = m -> m.getTeam1().getAthleteList().contains(athlete) ||
-                m.getTeam2().getAthleteList().contains(athlete);
+    public List<Event> getAthleteCalendar(Athlete athlete) {
+        Predicate<Event> isAthleteMemberOfEventMatch = e -> e.getMatch().getTeam1().getAthleteList().contains(athlete) ||
+                e.getMatch().getTeam2().getAthleteList().contains(athlete);
 
-        List<Match> eventList = repository.getMatchObjects();
-        log.info("found {} events", eventList.size());
-
-        List<Match> filteredMatchList = eventList.stream().filter(isAthleteMemberOfEventMatch).collect(Collectors.toList());
-        log.info("filtered {} matches", filteredMatchList.size());
-
-        return filteredMatchList;
+        return repository.getEventObjects()
+                .stream()
+                .filter(isAthleteMemberOfEventMatch)
+                .collect(Collectors.toList());
     }
-
 }

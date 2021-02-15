@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import volleyball.model.association.Association;
 import volleyball.model.club.Club;
 import volleyball.model.competition.Competition;
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 import volleyball.model.athlete.Athlete;
 import volleyball.model.result.Result;
@@ -110,21 +111,45 @@ public class Factory implements IModelFactory {
     protected Predicate<IEventData> isSecondTeamNamePresent = data -> data.getTeam2Name().isPresent();
 
     @Override
-    public List<Match> parseDataAndSaveObjects(IParser parser) {
+    public List<Event> parseDataAndSaveEventObjects(IParser parser) {
         List<IEventData> eventDataList = parser.parseFile();
-        List<Match> matchList = Lists.newLinkedList();
+        List<Event> eventList = Lists.newLinkedList();
 
         eventDataList.forEach(eventData -> {
-            Optional<Match> savedMatch = buildAndSaveMatchObject(eventData);
-            if (savedMatch.isPresent())
-                matchList.add(savedMatch.get());
+            Optional<Event> savedEvent = buildAndSaveEventObject(eventData);
+
+            if (savedEvent.isPresent())
+                eventList.add(savedEvent.get());
         });
 
-        return matchList;
+        return eventList;
     }
 
     @Override
-    public Optional<Match> buildAndSaveMatchObject(IEventData eventData) {
+    public Optional<Event> buildAndSaveEventObject(IEventData eventData) {
+        Optional<Match> match = buildAndSaveMatchObject(eventData);
+        if (!match.isPresent()) {
+            log.error("the match is required and can't be empty -  so return an empty object");
+            return Optional.empty();
+        }
+
+        Event event = Event.builder()
+                .withMatch(match.get())
+                .build();
+
+        log.info("build event : {}", match);
+
+        return repository.saveEventObject(event);
+    }
+
+
+    /**
+     * build and save a {@link Match} object
+     *
+     * @param eventData - the event data
+     * @return the saved {@link Match} object or an empty object
+     */
+    protected Optional<Match> buildAndSaveMatchObject(IEventData eventData) {
         if (eventData == null) {
             log.error("the required parser data can't be NULL -  so return an empty object");
             return Optional.empty();

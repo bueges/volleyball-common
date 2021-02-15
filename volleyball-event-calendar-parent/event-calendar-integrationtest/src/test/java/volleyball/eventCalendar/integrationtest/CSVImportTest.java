@@ -34,7 +34,7 @@ public class CSVImportTest {
 
         // import playing schedule without result
         csvParser = new CSVParser(associationName, Paths.get("src", "test", "resources", "csvParser", "PlayingSchedule.csv"));
-        samsFactory.parseDataAndSaveObjects(csvParser);
+        samsFactory.parseDataAndSaveEventObjects(csvParser);
 
         List<Match> matchList = repository.getMatchObjects();
         assertNotNull(matchList);
@@ -45,7 +45,7 @@ public class CSVImportTest {
 
         // import playing schedule with result
         csvParser = new CSVParser(associationName, Paths.get("src", "test", "resources", "csvParser", "PlayingScheduleWithResult.csv"));
-        samsFactory.parseDataAndSaveObjects(csvParser);
+        samsFactory.parseDataAndSaveEventObjects(csvParser);
 
         matchList = repository.getMatchObjects();
         assertNotNull(matchList);

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import volleyball.model.athlete.Athlete;
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class EventCalendarController {
     EventCalendarService calendarService;
 
     @GetMapping("/athleteCalendar")
-    public List<Match> getAthleteCalendar(@RequestParam Athlete athlete) {
+    public List<Event> getAthleteCalendar(@RequestParam Athlete athlete) {
         return calendarService.getAthleteCalendar(athlete);
     }
 }

@@ -1,5 +1,6 @@
 package volleyball.factory;
 
+import volleyball.model.event.Event;
 import volleyball.model.match.Match;
 import volleyball.model.athlete.Athlete;
 import volleyball.modelData.athleteData.IAthleteData;
@@ -11,15 +12,15 @@ import java.util.Optional;
 
 public interface IModelFactory {
 
-    List<Match> parseDataAndSaveObjects(IParser parser);
+    List<Event> parseDataAndSaveEventObjects(IParser parser);
 
     /**
-     * build and save a {@link Match} object
+     * build and save a {@link Event} object
      *
      * @param eventData - the parsed data
      * @return the saved {@link Match} object or an empty object
      */
-    Optional<? extends Match> buildAndSaveMatchObject(IEventData eventData);
+    Optional<? extends Event> buildAndSaveEventObject(IEventData eventData);
 
     /**
      * build and save a {@link Athlete} object

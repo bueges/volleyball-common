@@ -94,10 +94,10 @@ public class EventCalendarControllerTest {
         team2.setAthleteList(Lists.newArrayList(athlete));
         Optional<Team> savedTeam2 = repository.saveTeamObject(team2);
 
-        List<Match> eventList = controller.getAthleteCalendar(athlete);
+        List<Event> eventList = controller.getAthleteCalendar(athlete);
         assertNotNull(eventList);
 
         assertTrue(eventList.size() > 0);
-        eventList.forEach(e -> System.out.println(e.getTeam1().getName() + " vs. " + e.getTeam2().getName()));
+        eventList.forEach(e -> System.out.println(e.getMatch().getTeam1().getName() + " vs. " + e.getMatch().getTeam2().getName()));
     }
 }
