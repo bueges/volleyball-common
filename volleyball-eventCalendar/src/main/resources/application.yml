@@ -1,0 +1,13 @@
+debug: true
+
+spring:
+  datasource:
+    password: h2pw
+    username: root
+    url: jdbc:h2:mem:testdb
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
