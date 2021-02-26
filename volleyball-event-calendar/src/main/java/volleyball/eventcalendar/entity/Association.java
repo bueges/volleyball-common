@@ -2,7 +2,7 @@ package volleyball.eventcalendar.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Builder(setterPrefix = "with")
 @NoArgsConstructor
@@ -12,9 +12,5 @@ import javax.persistence.*;
 public class Association extends DefaultEntity {
 
     @NonNull
-    @Column(unique = true)
     private String name;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Season season;
 }

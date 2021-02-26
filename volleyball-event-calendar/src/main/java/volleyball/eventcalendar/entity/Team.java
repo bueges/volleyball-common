@@ -1,9 +1,6 @@
 package volleyball.eventcalendar.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -15,11 +12,14 @@ import javax.persistence.ManyToOne;
 @Data
 public class Team extends DefaultEntity {
 
+    @NonNull
     private String name;
 
+    @NonNull
     @ManyToOne
     private Club club;
 
+    @NonNull
     @ManyToOne
     private Competition competition;
 }

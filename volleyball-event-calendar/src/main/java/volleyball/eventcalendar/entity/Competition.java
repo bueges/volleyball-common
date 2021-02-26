@@ -12,10 +12,9 @@ import javax.persistence.*;
 public class Competition extends DefaultEntity {
 
     @NonNull
-    @Column(unique = true)
     private String name;
 
     @NonNull
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Association association;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Season season;
 }

@@ -18,11 +18,9 @@ public class VolleyballEventCalendarApplication {
     }
 
     @Bean
-    public ApplicationRunner init(MatchFactory matchFactory) {
+    public ApplicationRunner init(DataService dataService) {
         return args -> {
-            matchFactory.creatSeason(2020, 2021);
-            matchFactory.creatSeason(2020, 2021);
+            dataService.init();
         };
-
     }
 }
